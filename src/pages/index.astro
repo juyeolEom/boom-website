@@ -1,0 +1,155 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const pageUrl = (path = "") => `${base}/${path}`;
+
+// 나중에 이미지를 바꿀 때는 public/images 안의 같은 파일명만 덮어쓰면 됩니다.
+const images = {
+  hero: pageUrl("images/boom-hero.png"),
+  microscopy: pageUrl("images/research-microscopy.png"),
+  lightSheet: pageUrl("images/research-light-sheet.png"),
+};
+
+const researchAreas = [
+  { number: "01", title: "Advanced Optical Microscopy", text: "We develop imaging systems that reveal biological structures with greater clarity, speed, and depth.", image: images.microscopy, alt: "Fluorescence microscopy view of a cellular network" },
+  { number: "02", title: "Computational Bioimaging", text: "Optical design and computation work together to recover information beyond conventional imaging limits.", image: images.lightSheet, alt: "Volumetric light sheets passing through translucent tissue" },
+];
+---
+
+<Layout title="BOOM Lab | Biomedical Optics & Optical Metrology" description="BOOM Lab develops biomedical optics and optical metrology technologies.">
+  <section class="hero">
+    <img class="hero-image" src={images.hero} alt="Optical beam illuminating fluorescent cellular structures" />
+    <div class="hero-shade"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="eyebrow"><span></span> Biomedical Optics &amp; Optical Metrology</p>
+      <h1>We illuminate<br />the <em>unseen.</em></h1>
+      <p class="intro">Exploring life through light—building new optical tools to see deeper, measure faster, and understand more.</p>
+      <div class="hero-actions">
+        <a class="primary-button" href={pageUrl("research")}>Explore our research <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href="#about">Discover the lab <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <div class="hero-index" aria-hidden="true"><span>01</span><i></i><span>03</span></div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-label"><span>About us</span><i></i></div>
+    <div class="about-copy">
+      <p class="kicker">Beyond what the eye can see</p>
+      <h2>Light is more than a way to see.<br />It is a way to <em>discover.</em></h2>
+      <div class="about-detail">
+        <p>BOOM Lab sits at the intersection of optics, engineering, and biology. We create imaging technologies that turn complex biological processes into information researchers can see and use.</p>
+        <a href={pageUrl("people/professor")}>Meet our people <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="research-preview">
+    <div class="research-heading">
+      <div><p class="kicker">What we explore</p><h2>Research areas</h2></div>
+      <a href={pageUrl("research")}>View all research <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="research-grid">
+      {researchAreas.map((area) => (
+        <article class="research-card">
+          <a href={pageUrl("research")} aria-label={`Learn about ${area.title}`}>
+            <div class="card-image"><img src={area.image} alt={area.alt} loading="lazy" /><span>{area.number}</span></div>
+            <div class="card-body"><h3>{area.title}</h3><p>{area.text}</p><i aria-hidden="true">↗</i></div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="news-preview">
+    <div><p class="kicker">From the lab</p><h2>Latest news</h2></div>
+    <div class="news-list">
+      <a href={pageUrl("news")}><time datetime="2026-09-01">Sep 01, 2026</time><strong>Add your latest lab news or publication highlight here.</strong><span aria-hidden="true">↗</span></a>
+      <a href={pageUrl("news")}><time datetime="2026-08-14">Aug 14, 2026</time><strong>This area is ready for awards, events, and team updates.</strong><span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero { position: relative; min-height: 720px; height: calc(100svh - 20px); overflow: hidden; display: flex; align-items: center; }
+  .hero-image, .hero-shade, .hero-grid { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-image { object-fit: cover; object-position: center; }
+  .hero-shade { background: linear-gradient(90deg, rgba(4, 16, 28, 0.98) 0%, rgba(4, 16, 28, 0.82) 40%, rgba(4, 16, 28, 0.1) 78%); }
+  .hero-grid { opacity: 0.12; background-image: linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(90deg, black, transparent 70%); }
+  .hero-content { position: relative; z-index: 2; width: var(--content); margin: 0 auto; padding: 80px 0 100px; }
+  .eyebrow, .kicker { margin: 0; color: var(--acid); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+  .eyebrow { display: flex; align-items: center; gap: 12px; }
+  .eyebrow span { width: 28px; height: 1px; background: var(--acid); }
+  h1 { max-width: 860px; margin: 30px 0 24px; font-size: clamp(4.2rem, 8.8vw, 8.1rem); line-height: 0.85; letter-spacing: -0.075em; }
+  h1 em, h2 em { color: var(--cyan); font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+  .intro { max-width: 560px; margin: 0; color: #c0cbd3; font-size: 1.1rem; line-height: 1.75; }
+  .hero-actions { display: flex; align-items: center; gap: 34px; margin-top: 42px; }
+  .primary-button { min-width: 206px; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; border-radius: 2px; background: var(--acid); color: var(--ink); font-size: 0.82rem; font-weight: 700; transition: background 180ms ease, transform 180ms ease; }
+  .primary-button:hover { background: var(--white); transform: translateY(-2px); }
+  .text-link { padding-bottom: 5px; border-bottom: 1px solid var(--line); color: #e0e7eb; font-size: 0.82rem; }
+  .text-link span { margin-left: 8px; color: var(--acid); }
+  .hero-index { position: absolute; z-index: 2; right: max(32px, calc((100vw - 1280px) / 2)); bottom: 58px; display: flex; align-items: center; gap: 11px; font-size: 0.68rem; }
+  .hero-index i { width: 72px; height: 1px; background: linear-gradient(90deg, var(--acid) 33%, rgba(255,255,255,.28) 33%); }
+  .about { width: var(--content); margin: 0 auto; padding: 140px 0; display: grid; grid-template-columns: 1fr 4fr; gap: 64px; }
+  .section-label { display: flex; align-items: flex-start; gap: 14px; padding-top: 35px; color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; }
+  .section-label i { flex: 1; height: 1px; margin-top: 8px; background: var(--line); }
+  .about h2 { max-width: 950px; margin: 24px 0 50px; font-size: clamp(2.7rem, 5.3vw, 5.6rem); line-height: 1.02; letter-spacing: -0.055em; }
+  .about-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: end; }
+  .about-detail p { max-width: 590px; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
+  .about-detail a, .research-heading > a { justify-self: end; padding-bottom: 6px; border-bottom: 1px solid var(--acid); font-size: 0.82rem; }
+  .about-detail a span, .research-heading > a span { margin-left: 20px; color: var(--acid); }
+  .research-preview { padding: 120px max(32px, calc((100vw - 1280px) / 2)); background: var(--paper); color: var(--ink); }
+  .research-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 58px; }
+  .research-heading .kicker, .news-preview .kicker { color: #557074; }
+  .research-heading h2, .news-preview h2 { margin: 14px 0 0; font-size: clamp(2.6rem, 4.5vw, 4.5rem); line-height: 1; letter-spacing: -0.055em; }
+  .research-heading > a { border-color: #506469; }
+  .research-heading > a span { color: #47686e; }
+  .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .research-card { background: var(--white); }
+  .card-image { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--ink-soft); }
+  .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
+  .card-image span { position: absolute; top: 18px; left: 18px; display: grid; place-items: center; width: 38px; height: 38px; background: var(--acid); color: var(--ink); font-size: 0.72rem; font-weight: 700; }
+  .research-card:hover .card-image img { transform: scale(1.035); }
+  .card-body { position: relative; padding: 28px 72px 32px 28px; min-height: 176px; }
+  .card-body h3 { margin: 0 0 12px; font-size: 1.45rem; letter-spacing: -0.03em; }
+  .card-body p { max-width: 510px; margin: 0; color: #59666a; font-size: 0.9rem; line-height: 1.65; }
+  .card-body i { position: absolute; top: 30px; right: 28px; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #bdc6c4; border-radius: 50%; font-style: normal; }
+  .news-preview { width: var(--content); margin: 0 auto; padding: 120px 0 140px; display: grid; grid-template-columns: 1fr 2fr; gap: 70px; }
+  .news-preview .kicker { color: var(--acid); }
+  .news-list { border-top: 1px solid var(--line); }
+  .news-list a { display: grid; grid-template-columns: 130px 1fr auto; gap: 28px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); transition: color 180ms ease; }
+  .news-list a:hover { color: var(--acid); }
+  .news-list time { color: var(--muted); font-size: 0.78rem; }
+  .news-list strong { font-size: 1rem; font-weight: 500; }
+  .news-list span { color: var(--acid); }
+  @media (max-width: 980px) {
+    .hero { min-height: 680px; height: auto; }
+    .about { grid-template-columns: 1fr; padding: 100px 0; }
+    .section-label { max-width: 260px; padding-top: 0; }
+    .research-preview { padding-inline: 20px; }
+    .news-preview { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .hero { min-height: 660px; }
+    .hero-image { object-position: 62% center; }
+    .hero-shade { background: linear-gradient(90deg, rgba(4,16,28,.98), rgba(4,16,28,.64)); }
+    .hero-content { padding: 70px 0 120px; }
+    h1 { font-size: clamp(3.65rem, 18vw, 5.8rem); }
+    .intro { font-size: 1rem; }
+    .hero-actions { align-items: flex-start; flex-direction: column; gap: 22px; }
+    .hero-index { left: 14px; right: auto; bottom: 38px; }
+    .about { padding: 80px 0; gap: 34px; }
+    .about h2 { margin-bottom: 34px; }
+    .about-detail { grid-template-columns: 1fr; gap: 32px; }
+    .about-detail a { justify-self: start; }
+    .research-preview { padding-block: 80px; }
+    .research-heading { align-items: flex-start; flex-direction: column; }
+    .research-heading > a { justify-self: start; }
+    .research-grid { grid-template-columns: 1fr; }
+    .news-preview { padding: 80px 0 90px; gap: 42px; }
+    .news-list a { grid-template-columns: 1fr auto; gap: 10px; }
+    .news-list time { grid-column: 1 / -1; }
+  }
+</style>
