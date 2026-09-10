@@ -12,8 +12,8 @@ const images = {
 };
 
 const researchAreas = [
-  { number: "01", title: "Advanced Optical Microscopy", text: "We develop imaging systems that reveal biological structures with greater clarity, speed, and depth.", image: images.microscopy, alt: "Fluorescence microscopy view of a cellular network" },
-  { number: "02", title: "Computational Bioimaging", text: "Optical design and computation work together to recover information beyond conventional imaging limits.", image: images.lightSheet, alt: "Volumetric light sheets passing through translucent tissue" },
+  { number: "01", title: "Biomedical Optics", text: "We use the interaction between light and biological tissue to develop imaging and sensing methods for life science and medicine.", href: "research#biomedical-optics", image: images.microscopy, alt: "Fluorescence microscopy view of a cellular network" },
+  { number: "02", title: "Optical Metrology", text: "We develop precise, non-contact optical methods to measure shape, motion, surfaces, and material properties.", href: "research#optical-metrology", image: images.lightSheet, alt: "Volumetric light sheets passing through translucent tissue" },
 ];
 ---
 
@@ -54,7 +54,7 @@ const researchAreas = [
     <div class="research-grid">
       {researchAreas.map((area) => (
         <article class="research-card">
-          <a href={pageUrl("research")} aria-label={`Learn about ${area.title}`}>
+          <a href={pageUrl(area.href)} aria-label={`Learn about ${area.title}`}>
             <div class="card-image"><img src={area.image} alt={area.alt} loading="lazy" /><span>{area.number}</span></div>
             <div class="card-body"><h3>{area.title}</h3><p>{area.text}</p><i aria-hidden="true">↗</i></div>
           </a>

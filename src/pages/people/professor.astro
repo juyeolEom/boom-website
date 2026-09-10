@@ -1,5 +1,102 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const pageUrl = (path = "") => `${base}/${path}`;
+
+const education = [
+  { degree: "Ph.D.", detail: "Dept. of Mechanical Engineering, KAIST", year: "2007" },
+  { degree: "M.S.", detail: "Dept. of Mechanical Engineering, KAIST", year: "2003" },
+  { degree: "B.S.", detail: "Dept. of Mechanical Engineering, KAIST", year: "2001" },
+];
+
+const experience = [
+  { period: "Sep 2025 — Present", role: "Professor", organization: "Dept. of Mechanical Engineering, KAIST" },
+  { period: "Feb 2019 — Aug 2025", role: "Associate Professor", organization: "Dept. of Mechanical Engineering, KAIST" },
+  { period: "Sep 2016 — Feb 2019", role: "Associate Professor", organization: "Dept. of Biomedical Engineering, Hanyang University" },
+  { period: "Mar 2012 — Oct 2016", role: "Assistant Professor", organization: "Dept. of Biomedical Engineering, Hanyang University" },
+  { period: "Sep 2008 — Jan 2012", role: "Research Fellow / Instructor", organization: "Wellman Center for Photomedicine, Harvard Medical School and Massachusetts General Hospital" },
+  { period: "Sep 2007 — Oct 2008", role: "Postdoctoral Researcher", organization: "Dept. of Mechanical Engineering, KAIST" },
+];
 ---
 
-<Layout title="Professor | BOOM Lab" />
+<Layout title="Hongki Yoo, Ph.D. | BOOM Lab" description="Professor Hongki Yoo leads the Biomedical Optics and Optical Metrology Laboratory at KAIST.">
+  <PageIntro eyebrow="People · Professor" title="Hongki Yoo, Ph.D." />
+  <section class="profile">
+    <aside class="portrait-column">
+      <div class="portrait-frame">
+        <img src={pageUrl("images/hongki-yoo.jpg")} alt="Portrait of Professor Hongki Yoo" />
+        <span aria-hidden="true">BOOM / 01</span>
+      </div>
+    </aside>
+    <div class="profile-content">
+      <div class="identity">
+        <p class="role">Professor</p>
+        <h2>Hongki Yoo</h2>
+        <p class="department">Department of Mechanical Engineering<br />Korea Advanced Institute of Science and Technology</p>
+      </div>
+      <dl class="contact-grid">
+        <div><dt>Phone</dt><dd><a href="tel:+82423503243">+82-42-350-3243</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:h.yoo@kaist.ac.kr">h.yoo (at) kaist.ac.kr</a></dd></div>
+        <div><dt>Office</dt><dd>N7-4 3204 (ME Building)</dd></div>
+      </dl>
+      <section class="record-section">
+        <div class="section-heading"><span>01</span><h2>Education</h2></div>
+        <div class="education-list">
+          {education.map((item) => <div class="education-item"><strong>{item.degree}</strong><p>{item.detail}</p><time>{item.year}</time></div>)}
+        </div>
+      </section>
+      <section class="record-section experience-section">
+        <div class="section-heading"><span>02</span><h2>Professional experience</h2></div>
+        <div class="timeline">
+          {experience.map((item) => <article><time>{item.period}</time><div><h3>{item.role}</h3><p>{item.organization}</p></div></article>)}
+        </div>
+      </section>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .profile { width: var(--content); margin: 0 auto; padding: 100px 0 140px; display: grid; grid-template-columns: minmax(280px, 390px) 1fr; gap: clamp(60px, 8vw, 120px); align-items: start; }
+  .portrait-column { position: sticky; top: 32px; }
+  .portrait-frame { position: relative; overflow: hidden; background: #e8ecec; }
+  .portrait-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.22); pointer-events: none; }
+  .portrait-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+  .portrait-frame span { position: absolute; left: 0; bottom: 0; padding: 10px 13px; background: var(--acid); color: var(--ink); font-size: .68rem; font-weight: 800; letter-spacing: .12em; }
+  .identity { padding-bottom: 48px; border-bottom: 1px solid var(--line); }
+  .role { margin: 0 0 12px; color: var(--acid); font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+  .identity h2 { margin: 0; font-size: clamp(2.7rem, 5vw, 5rem); line-height: 1; letter-spacing: -.055em; }
+  .department { margin: 22px 0 0; color: var(--muted); font-size: 1rem; line-height: 1.7; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; margin: 0 0 96px; }
+  .contact-grid > div { padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .contact-grid > div:last-child { grid-column: 1 / -1; }
+  dt { margin-bottom: 7px; color: #72818d; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  dd { margin: 0; font-size: .94rem; }
+  dd a:hover { color: var(--acid); }
+  .record-section { margin-top: 78px; }
+  .section-heading { display: flex; align-items: baseline; gap: 18px; margin-bottom: 30px; }
+  .section-heading span { color: var(--acid); font-size: .72rem; font-weight: 700; }
+  .section-heading h2 { margin: 0; font-size: clamp(2rem, 3.4vw, 3.2rem); letter-spacing: -.045em; }
+  .education-list, .timeline { border-top: 1px solid var(--line); }
+  .education-item { display: grid; grid-template-columns: 90px 1fr auto; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .education-item strong { color: var(--cyan); font-size: .88rem; }
+  .education-item p { margin: 0; color: #d7dee3; }
+  .education-item time { color: var(--muted); font-size: .82rem; }
+  .timeline article { position: relative; display: grid; grid-template-columns: 170px 1fr; gap: 34px; padding: 26px 0 28px 22px; border-bottom: 1px solid var(--line); }
+  .timeline article::before { content: ""; position: absolute; left: 0; top: 34px; width: 6px; height: 6px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 12px rgba(200,255,46,.7); }
+  .timeline time { color: var(--muted); font-size: .78rem; }
+  .timeline h3 { margin: 0 0 7px; font-size: 1.03rem; }
+  .timeline p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.6; }
+  @media (max-width: 860px) {
+    .profile { grid-template-columns: 1fr; padding-top: 64px; }
+    .portrait-column { position: static; max-width: 390px; }
+  }
+  @media (max-width: 600px) {
+    .contact-grid { grid-template-columns: 1fr; margin-bottom: 70px; }
+    .contact-grid > div:last-child { grid-column: auto; }
+    .education-item { grid-template-columns: 64px 1fr; }
+    .education-item time { grid-column: 2; }
+    .timeline article { grid-template-columns: 1fr; gap: 10px; }
+  }
+</style>

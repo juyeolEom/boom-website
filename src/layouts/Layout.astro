@@ -8,13 +8,38 @@ const pageUrl = (path = "") => `${base}/${path}`;
 const currentPath = Astro.url.pathname.replace(base, "").replace(/\/$/, "") || "/";
 
 const navItems = [
-  { label: "Research", href: "research" },
-  { label: "Professor", href: "people/professor" },
-  { label: "Students", href: "people/students" },
-  { label: "Alumni", href: "people/alumni" },
-  { label: "Publications", href: "publication" },
-  { label: "News", href: "news" },
-];
+  {
+    label: "People",
+    paths: ["/people"],
+    children: [
+      { label: "Professor", href: "people/professor" },
+      { label: "Student", href: "people/students" },
+      { label: "Alumni", href: "people/alumni" },
+    ],
+  },
+  {
+    label: "Research",
+    paths: ["/research"],
+    children: [
+      { label: "Biomedical Optics", href: "research#biomedical-optics" },
+      { label: "Optical Metrology", href: "research#optical-metrology" },
+    ],
+  },
+  {
+    label: "Publication",
+    paths: ["/publication", "/conference"],
+    children: [
+      { label: "Publication", href: "publication" },
+      { label: "Conference", href: "conference" },
+    ],
+  },
+  { label: "Lecture", href: "lecture", paths: ["/lecture"] },
+  { label: "Gallery", href: "gallery", paths: ["/gallery"] },
+  { label: "News", href: "news", paths: ["/news"] },
+].map((item) => ({
+  ...item,
+  active: item.paths.some((path) => currentPath.startsWith(path)),
+}));
 ---
 
 <!doctype html>
@@ -39,18 +64,24 @@ const navItems = [
 
       <nav aria-label="Primary navigation">
         {
-          navItems.map((item) => (
-            <a
-              href={pageUrl(item.href)}
-              aria-current={currentPath === `/${item.href}` ? "page" : undefined}
-            >
-              {item.label}
-            </a>
+          navItems.map((item) => item.children ? (
+            <details class="nav-group">
+              <summary class:list={{ active: item.active }}>
+                {item.label}<span aria-hidden="true">⌄</span>
+              </summary>
+              <div class="dropdown">
+                {item.children.map((child) => (
+                  <a href={pageUrl(child.href)}>{child.label}<span aria-hidden="true">↗</span></a>
+                ))}
+              </div>
+            </details>
+          ) : (
+            <a href={pageUrl(item.href)} aria-current={item.active ? "page" : undefined}>{item.label}</a>
           ))
         }
       </nav>
 
-      <a class="contact-link" href="mailto:boomlab@example.edu">
+      <a class="contact-link" href="mailto:h.yoo@kaist.ac.kr">
         Contact <span aria-hidden="true">↗</span>
       </a>
     </header>
@@ -63,8 +94,8 @@ const navItems = [
         <p>Biomedical Optics and Optical Metrology Laboratory</p>
       </div>
       <div class="footer-meta">
-        <p>Department / University Name</p>
-        <p>City, Republic of Korea</p>
+        <p>Department of Mechanical Engineering, KAIST</p>
+        <p>Daejeon, Republic of Korea</p>
         <p>© {new Date().getFullYear()} BOOM Lab</p>
       </div>
     </footer>
@@ -103,7 +134,7 @@ const navItems = [
     height: 104px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 290px 1fr auto;
+    grid-template-columns: 270px 1fr auto;
     align-items: center;
     gap: 28px;
     border-bottom: 1px solid var(--line);
@@ -117,10 +148,20 @@ const navItems = [
   .brand-mark i:nth-child(1) { top: 7px; left: 14px; }
   .brand-mark i:nth-child(2) { top: 20px; left: 8px; }
   .brand-mark i:nth-child(3) { top: 19px; right: 7px; }
-  nav { display: flex; justify-content: center; gap: clamp(18px, 2.4vw, 38px); }
-  nav a { position: relative; color: #d9e1e6; font-size: 0.83rem; letter-spacing: 0.02em; }
-  nav a::after { content: ""; position: absolute; left: 0; bottom: -10px; width: 100%; height: 2px; background: var(--acid); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
-  nav a:hover::after, nav a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+  nav { display: flex; justify-content: center; align-items: center; gap: clamp(14px, 1.8vw, 28px); }
+  nav > a, .nav-group summary { position: relative; color: #d9e1e6; font-size: 0.83rem; letter-spacing: 0.02em; white-space: nowrap; }
+  nav > a::after, .nav-group summary::after { content: ""; position: absolute; left: 0; bottom: -10px; width: 100%; height: 2px; background: var(--acid); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
+  nav > a:hover::after, nav > a[aria-current="page"]::after, .nav-group summary:hover::after, .nav-group summary.active::after { transform: scaleX(1); transform-origin: left; }
+  .nav-group { position: relative; }
+  .nav-group summary { display: flex; align-items: center; gap: 6px; list-style: none; cursor: pointer; }
+  .nav-group summary::-webkit-details-marker { display: none; }
+  .nav-group summary span { color: var(--acid); font-size: 0.68rem; transition: transform 180ms ease; }
+  .nav-group[open] summary span { transform: rotate(180deg); }
+  .dropdown { position: absolute; top: 32px; left: 50%; min-width: 210px; padding: 9px; background: #0a1a2a; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.28); transform: translateX(-50%); opacity: 0; visibility: hidden; transition: opacity 160ms ease, visibility 160ms ease, transform 160ms ease; }
+  .nav-group[open] .dropdown, .nav-group:hover .dropdown, .nav-group:focus-within .dropdown { opacity: 1; visibility: visible; transform: translate(-50%, 4px); }
+  .dropdown a { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 11px 12px; color: #d9e1e6; font-size: 0.78rem; }
+  .dropdown a:hover { background: rgba(255,255,255,.06); color: var(--acid); }
+  .dropdown a span { color: var(--acid); }
   .contact-link { min-width: 108px; display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border: 1px solid var(--line); border-radius: 99px; font-size: 0.8rem; transition: color 180ms ease, border-color 180ms ease; }
   .contact-link:hover { color: var(--acid); border-color: var(--acid); }
   .site-footer { width: var(--content); margin: 0 auto; padding: 68px 0 44px; display: flex; justify-content: space-between; gap: 32px; border-top: 1px solid var(--line); }
@@ -130,11 +171,10 @@ const navItems = [
   .footer-meta { text-align: right; }
   .footer-meta p { margin: 0 0 4px; }
   :focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; }
-  @media (max-width: 980px) {
+  @media (max-width: 1100px) {
     :root { --content: min(100% - 40px, 1280px); }
     .site-header { height: auto; min-height: 92px; grid-template-columns: 1fr auto; }
-    .site-header nav { grid-column: 1 / -1; order: 3; justify-content: flex-start; padding: 16px 0; overflow-x: auto; border-top: 1px solid var(--line); }
-    .site-header nav a { white-space: nowrap; }
+    .site-header nav { grid-column: 1 / -1; order: 3; justify-content: flex-start; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--line); }
   }
   @media (max-width: 640px) {
     :root { --content: min(100% - 28px, 1280px); }

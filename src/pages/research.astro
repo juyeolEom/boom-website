@@ -1,5 +1,74 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageIntro from "../components/PageIntro.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const pageUrl = (path = "") => `${base}/${path}`;
+
+const researchAreas = [
+  {
+    id: "biomedical-optics", number: "01", title: "Biomedical Optics",
+    lead: "Using light to visualize, measure, and understand living systems.",
+    description: "Biomedical optics brings optical science and engineering into the study of biological tissue. We explore how light interacts with cells and tissue, and use that interaction to design imaging and sensing approaches that reveal structural and functional information with minimal disturbance to the sample.",
+    detail: "Our approach combines optical system design, signal acquisition, and computational analysis. The goal is to translate subtle optical responses into clear, quantitative information that can support biological research and future medical applications.",
+    image: pageUrl("images/research-microscopy.png"), alt: "Fluorescent cellular structures visualized with biomedical optics",
+    tags: ["Optical imaging", "Light–tissue interaction", "Computational analysis"],
+  },
+  {
+    id: "optical-metrology", number: "02", title: "Optical Metrology",
+    lead: "Measuring form, motion, and material properties with precision light.",
+    description: "Optical metrology uses the wavelength, phase, intensity, and spectrum of light as precise measurement references. We develop non-contact methods for characterizing dimensions, surfaces, displacement, and dynamic behavior where conventional mechanical measurement is difficult or disruptive.",
+    detail: "By integrating optical instrumentation with robust calibration and data processing, we aim to improve measurement accuracy and repeatability across complex samples and experimental environments.",
+    image: pageUrl("images/research-light-sheet.png"), alt: "Light sheets measuring a translucent three-dimensional sample",
+    tags: ["Precision measurement", "Optical instrumentation", "Calibration & analysis"],
+  },
+];
 ---
 
-<Layout title="Research | BOOM Lab" />
+<Layout title="Research | BOOM Lab" description="Research in biomedical optics and optical metrology at BOOM Lab, KAIST.">
+  <PageIntro eyebrow="Research" title="Measuring the unseen" description="We develop optical methods that make hidden biological structures and physical quantities observable, measurable, and useful." />
+  <div class="research-index" aria-label="Research areas">
+    {researchAreas.map((area) => <a href={`#${area.id}`}><span>{area.number}</span>{area.title}</a>)}
+  </div>
+  <div class="research-sections">
+    {researchAreas.map((area, index) => (
+      <section class:list={["research-area", { reverse: index % 2 === 1 }]} id={area.id}>
+        <div class="research-image"><img src={area.image} alt={area.alt} /><span>{area.number}</span></div>
+        <div class="research-copy">
+          <p class="label">Research area {area.number}</p><h2>{area.title}</h2><p class="lead">{area.lead}</p>
+          <p>{area.description}</p><p>{area.detail}</p><ul>{area.tags.map((tag) => <li>{tag}</li>)}</ul>
+        </div>
+      </section>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .research-index { width: var(--content); margin: 0 auto; padding: 28px 0; display: flex; gap: 40px; border-bottom: 1px solid var(--line); }
+  .research-index a { display: flex; gap: 10px; color: #d6dee3; font-size: .84rem; }
+  .research-index a:hover { color: var(--acid); }
+  .research-index span { color: var(--acid); font-size: .68rem; }
+  .research-sections { width: var(--content); margin: 0 auto; padding: 100px 0 140px; }
+  .research-area { scroll-margin-top: 30px; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(54px, 8vw, 120px); align-items: center; padding: 0 0 120px; }
+  .research-area + .research-area { padding-top: 120px; border-top: 1px solid var(--line); }
+  .research-area.reverse .research-image { order: 2; }
+  .research-image { position: relative; overflow: hidden; background: var(--ink-soft); }
+  .research-image img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; }
+  .research-image span { position: absolute; top: 0; left: 0; width: 48px; height: 48px; display: grid; place-items: center; background: var(--acid); color: var(--ink); font-size: .72rem; font-weight: 800; }
+  .label { margin: 0 0 18px; color: var(--acid) !important; font-size: .7rem !important; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+  .research-copy h2 { margin: 0 0 22px; font-size: clamp(2.7rem, 5vw, 5rem); line-height: .96; letter-spacing: -.06em; }
+  .research-copy .lead { margin: 0 0 30px; color: var(--white); font-size: 1.25rem; line-height: 1.5; letter-spacing: -.02em; }
+  .research-copy > p { margin: 0 0 18px; color: var(--muted); font-size: .98rem; line-height: 1.78; }
+  ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 34px 0 0; padding: 0; list-style: none; }
+  li { padding: 8px 12px; border: 1px solid var(--line); color: #d9e1e6; font-size: .72rem; }
+  @media (max-width: 900px) {
+    .research-area { grid-template-columns: 1fr; }
+    .research-area.reverse .research-image { order: 0; }
+  }
+  @media (max-width: 600px) {
+    .research-index { flex-direction: column; gap: 14px; }
+    .research-sections { padding-top: 70px; }
+    .research-area { padding-bottom: 78px; }
+    .research-area + .research-area { padding-top: 78px; }
+  }
+</style>

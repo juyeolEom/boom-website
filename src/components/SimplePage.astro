@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageIntro from "./PageIntro.astro";
+
+const { title, eyebrow, description } = Astro.props;
+---
+
+<Layout title={`${title} | BOOM Lab`} description={description}>
+  <PageIntro eyebrow={eyebrow} title={title} description={description} />
+  <section class="empty-content" aria-label={`${title} content`}>
+    <span>BOOM LAB</span>
+    <p>Content will be updated here.</p>
+  </section>
+</Layout>
+
+<style>
+  .empty-content { width: var(--content); min-height: 320px; margin: 0 auto; padding: 72px 0 120px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--line); }
+  span { color: var(--acid); font-size: .7rem; font-weight: 700; letter-spacing: .16em; }
+  p { margin: 0; color: var(--muted); font-size: .92rem; }
+  @media (max-width: 600px) { .empty-content { min-height: 240px; flex-direction: column; gap: 24px; } }
+</style>
