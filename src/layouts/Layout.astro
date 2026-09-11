@@ -55,11 +55,7 @@ const navItems = [
   <body>
     <header class="site-header">
       <a class="brand" href={pageUrl()} aria-label="BOOM Lab home">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>
-          <strong>BOOM</strong>
-          <small>Biomedical Optics &amp;<br />Optical Metrology Lab</small>
-        </span>
+        <img class="brand-logo" src={pageUrl("images/boom-logo.png")} alt="BOOM Lab" />
       </a>
 
       <nav aria-label="Primary navigation">
@@ -90,7 +86,9 @@ const navItems = [
 
     <footer class="site-footer">
       <div>
-        <a class="footer-brand" href={pageUrl()}>BOOM <span>LAB</span></a>
+        <a class="footer-brand" href={pageUrl()} aria-label="BOOM Lab home">
+          <img src={pageUrl("images/boom-logo.png")} alt="BOOM Lab" />
+        </a>
         <p>Biomedical Optics and Optical Metrology Laboratory</p>
       </div>
       <div class="footer-meta">
@@ -110,8 +108,8 @@ const navItems = [
     --white: #ffffff;
     --muted: #a8b4be;
     --line: rgba(255, 255, 255, 0.16);
-    --acid: #c8ff2e;
-    --cyan: #4ae6ff;
+    --acid: #8ed8ff;
+    --cyan: #c2edff;
     --content: min(1280px, calc(100vw - 64px));
   }
   * { box-sizing: border-box; }
@@ -139,15 +137,8 @@ const navItems = [
     gap: 28px;
     border-bottom: 1px solid var(--line);
   }
-  .brand { display: flex; align-items: center; gap: 13px; width: max-content; }
-  .brand > span:last-child { display: flex; align-items: center; gap: 13px; }
-  .brand strong { font-size: 1.35rem; line-height: 1; letter-spacing: -0.04em; }
-  .brand small { color: var(--muted); font-size: 0.68rem; line-height: 1.15; letter-spacing: 0.04em; }
-  .brand-mark { position: relative; width: 34px; height: 34px; display: block; border: 1px solid rgba(200, 255, 46, 0.5); border-radius: 50%; }
-  .brand-mark i { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 10px var(--acid); }
-  .brand-mark i:nth-child(1) { top: 7px; left: 14px; }
-  .brand-mark i:nth-child(2) { top: 20px; left: 8px; }
-  .brand-mark i:nth-child(3) { top: 19px; right: 7px; }
+  .brand { display: block; width: max-content; }
+  .brand-logo { width: 238px; height: auto; filter: invert(1) hue-rotate(180deg); }
   nav { display: flex; justify-content: center; align-items: center; gap: clamp(14px, 1.8vw, 28px); }
   nav > a, .nav-group summary { position: relative; color: #d9e1e6; font-size: 0.83rem; letter-spacing: 0.02em; white-space: nowrap; }
   nav > a::after, .nav-group summary::after { content: ""; position: absolute; left: 0; bottom: -10px; width: 100%; height: 2px; background: var(--acid); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
@@ -165,8 +156,8 @@ const navItems = [
   .contact-link { min-width: 108px; display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border: 1px solid var(--line); border-radius: 99px; font-size: 0.8rem; transition: color 180ms ease, border-color 180ms ease; }
   .contact-link:hover { color: var(--acid); border-color: var(--acid); }
   .site-footer { width: var(--content); margin: 0 auto; padding: 68px 0 44px; display: flex; justify-content: space-between; gap: 32px; border-top: 1px solid var(--line); }
-  .footer-brand { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.05em; }
-  .footer-brand span { color: var(--acid); }
+  .footer-brand { display: block; width: max-content; }
+  .footer-brand img { width: 250px; height: auto; filter: invert(1) hue-rotate(180deg); }
   .site-footer p { margin: 10px 0 0; color: var(--muted); font-size: 0.8rem; }
   .footer-meta { text-align: right; }
   .footer-meta p { margin: 0 0 4px; }
@@ -179,7 +170,8 @@ const navItems = [
   @media (max-width: 640px) {
     :root { --content: min(100% - 28px, 1280px); }
     .site-header { min-height: 82px; gap: 14px; }
-    .brand small { display: none; }
+    .brand-logo { width: 170px; }
+    .footer-brand img { width: 210px; }
     .contact-link { min-width: auto; gap: 10px; }
     .site-footer { flex-direction: column; padding-top: 48px; }
     .footer-meta { text-align: left; }

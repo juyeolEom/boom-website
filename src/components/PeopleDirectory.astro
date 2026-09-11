@@ -27,9 +27,11 @@ const pageUrl = (path = "") => `${base}/${path}`;
               <div class="portrait">
                 <img src={pageUrl(member.image)} alt={`${member.koreanName} placeholder portrait`} loading="lazy" />
               </div>
-              <strong lang="ko">{member.koreanName}</strong>
-              <span>{member.englishName}</span>
-              <a href={`mailto:${member.email}`}>{member.email}</a>
+              <strong class="korean-name" lang="ko">{member.koreanName}</strong>
+              <span class="english-name">{member.englishName}</span>
+              {member.email && <span class="email">{member.email}</span>}
+              {member.degree && <span class="degree">{member.degree}</span>}
+              {member.currentPosition && <p class="current-position">{member.currentPosition}</p>}
             </li>
           ))}
         </ul>
@@ -52,11 +54,12 @@ const pageUrl = (path = "") => `${base}/${path}`;
   .portrait { width: clamp(94px, 9vw, 124px); aspect-ratio: 1; margin: 0 auto 20px; overflow: hidden; border-radius: 50%; background: var(--white); border: 1px solid #d4dcda; transition: transform 180ms ease, border-color 180ms ease; }
   .portrait img { width: 100%; height: 100%; padding: 13%; object-fit: contain; }
   .member-card:hover .portrait { transform: translateY(-4px); border-color: #799497; }
-  .member-card strong, .member-card span, .member-card a { display: block; overflow-wrap: anywhere; }
-  .member-card strong { margin-bottom: 4px; font-size: 1rem; font-weight: 750; }
-  .member-card span { margin-bottom: 9px; color: #43575b; font-size: .88rem; }
-  .member-card a { color: #6b797c; font-size: .76rem; transition: color 180ms ease; }
-  .member-card a:hover { color: #1d626e; text-decoration: underline; text-underline-offset: 3px; }
+  .member-card strong, .member-card span { display: block; overflow-wrap: anywhere; }
+  .korean-name { margin-bottom: 4px; font-size: 1rem; font-weight: 750; }
+  .english-name { margin-bottom: 8px; color: #43575b; font-size: .88rem; }
+  .email, .degree { color: #6b797c; font-size: .76rem; }
+  .degree { font-weight: 700; letter-spacing: .02em; }
+  .current-position { max-width: 180px; min-height: 2.9em; margin: 11px auto 0; padding-top: 10px; border-top: 1px solid #d7dedc; color: #43575b; font-size: .76rem; line-height: 1.45; }
   @media (max-width: 980px) {
     .directory-shell { padding-inline: 20px; }
     .member-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -70,6 +73,6 @@ const pageUrl = (path = "") => `${base}/${path}`;
     .section-heading { align-items: flex-start; flex-direction: column; margin-bottom: 44px; }
     .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .portrait { width: 96px; }
-    .member-card a { font-size: .7rem; }
+    .email, .degree, .current-position { font-size: .7rem; }
   }
 </style>
