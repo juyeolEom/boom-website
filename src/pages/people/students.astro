@@ -1,5 +1,22 @@
 ---
-import SimplePage from "../../components/SimplePage.astro";
+import PeopleDirectory from "../../components/PeopleDirectory.astro";
+
+const createMembers = (count) => Array.from({ length: count }, () => ({
+  koreanName: "넙죽이",
+  englishName: "Nupzuk",
+  email: "nupzuk@kaist.ac.kr",
+  image: "images/Nupzuk.png",
+}));
+
+const sections = [
+  { title: "PhD Students", members: createMembers(11) },
+  { title: "Master Students", members: createMembers(2) },
+  { title: "Researchers", members: createMembers(1) },
+];
 ---
 
-<SimplePage title="Student" eyebrow="People" description="Graduate students and researchers working in BOOM Lab." />
+<PeopleDirectory
+  title="Students"
+  description="Graduate students and researchers working in BOOM Lab."
+  sections={sections}
+/>

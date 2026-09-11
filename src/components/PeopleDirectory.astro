@@ -1,0 +1,75 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageIntro from "./PageIntro.astro";
+
+const { title, description, sections } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const pageUrl = (path = "") => `${base}/${path}`;
+---
+
+<Layout title={`${title} | BOOM Lab`} description={description}>
+  <PageIntro eyebrow="People" title={title} description={description} />
+
+  <div class="directory-shell">
+    {sections.map((section, sectionIndex) => (
+      <section class="member-section" aria-labelledby={`member-section-${sectionIndex}`}>
+        <header class="section-heading">
+          <div>
+            <span>{String(sectionIndex + 1).padStart(2, "0")}</span>
+            <h2 id={`member-section-${sectionIndex}`}>{section.title}</h2>
+          </div>
+          <p>{section.members.length} {section.members.length === 1 ? "member" : "members"}</p>
+        </header>
+
+        <ul class="member-grid">
+          {section.members.map((member) => (
+            <li class="member-card">
+              <div class="portrait">
+                <img src={pageUrl(member.image)} alt={`${member.koreanName} placeholder portrait`} loading="lazy" />
+              </div>
+              <strong lang="ko">{member.koreanName}</strong>
+              <span>{member.englishName}</span>
+              <a href={`mailto:${member.email}`}>{member.email}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .directory-shell { padding: 12px max(32px, calc((100vw - 1280px) / 2)) 140px; background: var(--paper); color: var(--ink); }
+  .member-section { padding: 96px 0 108px; border-bottom: 1px solid #ccd4d2; }
+  .member-section:last-child { border-bottom: 0; }
+  .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-bottom: 58px; }
+  .section-heading > div { display: flex; align-items: baseline; gap: 18px; }
+  .section-heading span { color: #4d686c; font-size: .72rem; font-weight: 800; letter-spacing: .12em; }
+  .section-heading h2 { margin: 0; font-size: clamp(2.1rem, 4vw, 3.8rem); line-height: 1; letter-spacing: -.05em; }
+  .section-heading p { margin: 0 0 5px; color: #637377; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .member-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 62px 34px; margin: 0; padding: 0; list-style: none; }
+  .member-card { min-width: 0; text-align: center; }
+  .portrait { width: clamp(94px, 9vw, 124px); aspect-ratio: 1; margin: 0 auto 20px; overflow: hidden; border-radius: 50%; background: var(--white); border: 1px solid #d4dcda; transition: transform 180ms ease, border-color 180ms ease; }
+  .portrait img { width: 100%; height: 100%; padding: 13%; object-fit: contain; }
+  .member-card:hover .portrait { transform: translateY(-4px); border-color: #799497; }
+  .member-card strong, .member-card span, .member-card a { display: block; overflow-wrap: anywhere; }
+  .member-card strong { margin-bottom: 4px; font-size: 1rem; font-weight: 750; }
+  .member-card span { margin-bottom: 9px; color: #43575b; font-size: .88rem; }
+  .member-card a { color: #6b797c; font-size: .76rem; transition: color 180ms ease; }
+  .member-card a:hover { color: #1d626e; text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 980px) {
+    .directory-shell { padding-inline: 20px; }
+    .member-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+  @media (max-width: 720px) {
+    .directory-shell { padding-bottom: 80px; }
+    .member-section { padding: 72px 0 82px; }
+    .member-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 18px; }
+  }
+  @media (max-width: 480px) {
+    .section-heading { align-items: flex-start; flex-direction: column; margin-bottom: 44px; }
+    .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .portrait { width: 96px; }
+    .member-card a { font-size: .7rem; }
+  }
+</style>

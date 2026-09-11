@@ -1,5 +1,18 @@
 ---
-import SimplePage from "../../components/SimplePage.astro";
+import PeopleDirectory from "../../components/PeopleDirectory.astro";
+
+const alumni = Array.from({ length: 17 }, () => ({
+  koreanName: "넙죽이",
+  englishName: "Nupzuk",
+  email: "nupzuk@kaist.ac.kr",
+  image: "images/Nupzuk.png",
+}));
+
+const sections = [{ title: "Alumni", members: alumni }];
 ---
 
-<SimplePage title="Alumni" eyebrow="People" description="Former members of the Biomedical Optics and Optical Metrology Laboratory." />
+<PeopleDirectory
+  title="Alumni"
+  description="Former members of the Biomedical Optics and Optical Metrology Laboratory."
+  sections={sections}
+/>
