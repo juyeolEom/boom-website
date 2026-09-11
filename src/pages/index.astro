@@ -46,6 +46,26 @@ const researchAreas = [
     </div>
   </section>
 
+  <section class="featured-video" aria-labelledby="featured-video-title">
+    <div class="video-heading">
+      <div>
+        <p class="kicker">Featured video</p>
+        <h2 id="featured-video-title">BOOM Lab in motion</h2>
+      </div>
+      <p>Discover our approach to optical measurement and biomedical imaging through this featured film.</p>
+    </div>
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/x6kmV8KAjc0?rel=0&playsinline=1"
+        title="BOOM Lab featured video"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </section>
+
   <section class="research-preview">
     <div class="research-heading">
       <div><p class="kicker">What we explore</p><h2>Research areas</h2></div>
@@ -100,6 +120,13 @@ const researchAreas = [
   .about-detail p { max-width: 590px; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
   .about-detail a, .research-heading > a { justify-self: end; padding-bottom: 6px; border-bottom: 1px solid var(--acid); font-size: 0.82rem; }
   .about-detail a span, .research-heading > a span { margin-left: 20px; color: var(--acid); }
+  .featured-video { width: var(--content); margin: 0 auto; padding: 0 0 140px; }
+  .video-heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: 70px; align-items: end; margin-bottom: 46px; }
+  .video-heading h2 { margin: 15px 0 0; font-size: clamp(2.7rem, 4.8vw, 4.8rem); line-height: 1; letter-spacing: -0.055em; }
+  .video-heading > p { max-width: 520px; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.75; }
+  .video-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.24); }
+  .video-frame::before { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04); }
+  .video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
   .research-preview { padding: 120px max(32px, calc((100vw - 1280px) / 2)); background: var(--paper); color: var(--ink); }
   .research-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 58px; }
   .research-heading .kicker, .news-preview .kicker { color: #557074; }
@@ -128,6 +155,7 @@ const researchAreas = [
     .hero { min-height: 680px; height: auto; }
     .about { grid-template-columns: 1fr; padding: 100px 0; }
     .section-label { max-width: 260px; padding-top: 0; }
+    .video-heading { grid-template-columns: 1fr; gap: 24px; }
     .research-preview { padding-inline: 20px; }
     .news-preview { grid-template-columns: 1fr; }
   }
@@ -144,6 +172,8 @@ const researchAreas = [
     .about h2 { margin-bottom: 34px; }
     .about-detail { grid-template-columns: 1fr; gap: 32px; }
     .about-detail a { justify-self: start; }
+    .featured-video { padding-bottom: 80px; }
+    .video-heading { margin-bottom: 30px; }
     .research-preview { padding-block: 80px; }
     .research-heading { align-items: flex-start; flex-direction: column; }
     .research-heading > a { justify-self: start; }
