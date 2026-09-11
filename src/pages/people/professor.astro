@@ -26,7 +26,7 @@ const experience = [
   <section class="profile">
     <aside class="portrait-column">
       <div class="portrait-frame">
-        <img src={pageUrl("images/hongki-yoo.jpg")} alt="Portrait of Professor Hongki Yoo" />
+        <img class="placeholder-portrait" src={pageUrl("images/Nupzuk.png")} alt="Nupzuk mascot placeholder" />
         <span aria-hidden="true">BOOM / 01</span>
       </div>
     </aside>
@@ -63,6 +63,7 @@ const experience = [
   .portrait-frame { position: relative; overflow: hidden; background: #e8ecec; }
   .portrait-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.22); pointer-events: none; }
   .portrait-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+  .portrait-frame img.placeholder-portrait { padding: 42px 26px; object-fit: contain; object-position: center; background: #fff; }
   .portrait-frame span { position: absolute; left: 0; bottom: 0; padding: 10px 13px; background: var(--acid); color: var(--ink); font-size: .68rem; font-weight: 800; letter-spacing: .12em; }
   .identity { padding-bottom: 48px; border-bottom: 1px solid var(--line); }
   .role { margin: 0 0 12px; color: var(--acid); font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
