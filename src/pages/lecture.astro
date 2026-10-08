@@ -1,5 +1,61 @@
 ---
-import SimplePage from "../components/SimplePage.astro";
+import Layout from "../layouts/Layout.astro";
+import PageIntro from "../components/PageIntro.astro";
+
+const courses = [
+  {
+    code: "ME 489",
+    id: "me-489",
+    title: "Programming for Signal and Image Processing",
+    koreanTitle: "신호 및 영상 처리를 위한 프로그래밍",
+    paragraphs: [
+      "It is essential for students majoring in mechanical engineering to analyze and process experimental data and images to extract useful information. In this course, basic concepts of signal and image processing will be studied. Through relevant exercises and assignments, students will learn MATLAB and OpenCV programming for real-world applications.",
+    ],
+  },
+  {
+    code: "ME 674",
+    id: "me-674",
+    title: "Optical Imaging System Design",
+    koreanTitle: "광학이미징 시스템 설계",
+    paragraphs: [
+      "The contents of this course include introduction of various optical imaging systems, design method of the optical imaging systems, and practical implementation of the optical instruments. Students will learn the basic principles, theory, design processes, and implementation of the optical imaging systems, such as digital microscopy, confocal laser scanning microscopy, and optical coherence tomography.",
+      "In particular, we will cover practical aspects of optical imaging system design through examples and exercises. By participating in the design process of the imaging systems, students will learn how to build optical imaging systems through hands-on experiences and process the data to form two- and three-dimensional images. Prerequisite courses, such as optics and biomedical optics, are useful but not necessary.",
+    ],
+  },
+];
 ---
 
-<SimplePage title="Lecture" eyebrow="Education" description="Courses and lecture materials offered by BOOM Lab." />
+<Layout title="Lecture | BOOM Lab" description="Courses in signal and image processing and optical imaging system design at KAIST, Department of Mechanical Engineering.">
+  <PageIntro title="Lecture" eyebrow="Education" description="KAIST, Department of Mechanical Engineering" />
+  <div class="courses">
+    {courses.map((course) => (
+      <section class="course" id={course.id} aria-labelledby={`${course.id}-title`}>
+        <header class="course-heading">
+          <p class="course-code">{course.code}</p>
+          <h2 id={`${course.id}-title`}>{course.title}</h2>
+          <p class="korean-title" lang="ko">{course.koreanTitle}</p>
+        </header>
+        <div class="course-introduction">
+          <h3>Lecture introduction</h3>
+          {course.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </section>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .courses { background: var(--paper); color: var(--ink); padding: 16px max(32px, calc((100vw - 1280px) / 2)) 100px; }
+  .course { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(40px, 7vw, 100px); padding: 80px 0; scroll-margin-top: 32px; }
+  .course + .course { border-top: 1px solid #cbd5d2; }
+  .course-code { margin: 0 0 20px; color: #42646d; font-size: .95rem; font-weight: 700; letter-spacing: .12em; }
+  .course-heading h2 { margin: 0; font-size: clamp(1.85rem, 3vw, 2.7rem); line-height: 1.17; letter-spacing: -.035em; text-wrap: balance; }
+  .korean-title { margin: 22px 0 0; color: #52676b; font-size: 1.05rem; line-height: 1.7; word-break: keep-all; }
+  .course-introduction h3 { margin: 0 0 22px; font-size: 1.05rem; font-weight: 600; }
+  .course-introduction p { margin: 0 0 22px; color: #43575b; font-size: 1.06rem; line-height: 1.85; }
+  .course-introduction p:last-child { margin-bottom: 0; }
+  @media (max-width: 800px) {
+    .courses { padding-inline: 20px; padding-bottom: 40px; }
+    .course { grid-template-columns: 1fr; gap: 32px; padding: 54px 0; }
+  }
+</style>

@@ -26,7 +26,7 @@ const experience = [
   <section class="profile">
     <aside class="portrait-column">
       <div class="portrait-frame">
-        <img class="placeholder-portrait" src={pageUrl("images/Nupzuk.png")} alt="Nupzuk mascot placeholder" />
+        <img src={pageUrl("images/people/hongki-yoo.jpg")} alt="Professor Hongki Yoo" width="750" height="900" decoding="async" />
         <span aria-hidden="true">BOOM / 01</span>
       </div>
     </aside>
@@ -62,33 +62,32 @@ const experience = [
   .portrait-column { position: sticky; top: 32px; }
   .portrait-frame { position: relative; overflow: hidden; background: #e8ecec; }
   .portrait-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.22); pointer-events: none; }
-  .portrait-frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
-  .portrait-frame img.placeholder-portrait { padding: 42px 26px; object-fit: contain; object-position: center; background: #fff; }
+  .portrait-frame img { display: block; width: 100%; height: auto; }
   .portrait-frame span { position: absolute; left: 0; bottom: 0; padding: 10px 13px; background: var(--acid); color: var(--ink); font-size: .68rem; font-weight: 800; letter-spacing: .12em; }
   .identity { padding-bottom: 48px; border-bottom: 1px solid var(--line); }
-  .role { margin: 0 0 12px; color: var(--acid); font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+  .role { margin: 0 0 12px; color: var(--acid); font-size: .88rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
   .identity h2 { margin: 0; font-size: clamp(2.7rem, 5vw, 5rem); line-height: 1; letter-spacing: -.055em; }
-  .department { margin: 22px 0 0; color: var(--muted); font-size: 1rem; line-height: 1.7; }
+  .department { margin: 22px 0 0; color: var(--muted); font-size: 1.1rem; line-height: 1.7; }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 36px; margin: 0 0 96px; }
   .contact-grid > div { padding: 24px 0; border-bottom: 1px solid var(--line); }
   .contact-grid > div:last-child { grid-column: 1 / -1; }
-  dt { margin-bottom: 7px; color: #72818d; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-  dd { margin: 0; font-size: .94rem; }
+  dt { margin-bottom: 7px; color: #92a1ad; font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  dd { margin: 0; font-size: 1.06rem; overflow-wrap: anywhere; }
   dd a:hover { color: var(--acid); }
   .record-section { margin-top: 78px; }
   .section-heading { display: flex; align-items: baseline; gap: 18px; margin-bottom: 30px; }
-  .section-heading span { color: var(--acid); font-size: .72rem; font-weight: 700; }
+  .section-heading span { color: var(--acid); font-size: .85rem; font-weight: 700; }
   .section-heading h2 { margin: 0; font-size: clamp(2rem, 3.4vw, 3.2rem); letter-spacing: -.045em; }
   .education-list, .timeline { border-top: 1px solid var(--line); }
   .education-item { display: grid; grid-template-columns: 90px 1fr auto; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
-  .education-item strong { color: var(--cyan); font-size: .88rem; }
-  .education-item p { margin: 0; color: #d7dee3; }
-  .education-item time { color: var(--muted); font-size: .82rem; }
+  .education-item strong { color: var(--cyan); font-size: 1rem; }
+  .education-item p { margin: 0; color: #d7dee3; font-size: 1.06rem; line-height: 1.65; }
+  .education-item time { color: var(--muted); font-size: .95rem; }
   .timeline article { position: relative; display: grid; grid-template-columns: 170px 1fr; gap: 34px; padding: 26px 0 28px 22px; border-bottom: 1px solid var(--line); }
   .timeline article::before { content: ""; position: absolute; left: 0; top: 34px; width: 6px; height: 6px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 12px rgba(142,216,255,.7); }
-  .timeline time { color: var(--muted); font-size: .78rem; }
-  .timeline h3 { margin: 0 0 7px; font-size: 1.03rem; }
-  .timeline p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.6; }
+  .timeline time { color: var(--muted); font-size: .92rem; line-height: 1.6; }
+  .timeline h3 { margin: 0 0 7px; font-size: 1.15rem; }
+  .timeline p { margin: 0; color: var(--muted); font-size: 1.04rem; line-height: 1.7; }
   @media (max-width: 860px) {
     .profile { grid-template-columns: 1fr; padding-top: 64px; }
     .portrait-column { position: static; max-width: 390px; }

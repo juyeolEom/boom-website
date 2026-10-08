@@ -27,11 +27,8 @@ const navItems = [
   },
   {
     label: "Publication",
-    paths: ["/publication", "/conference"],
-    children: [
-      { label: "Publication", href: "publication" },
-      { label: "Conference", href: "conference" },
-    ],
+    href: "publication",
+    paths: ["/publication"],
   },
   { label: "Lecture", href: "lecture", paths: ["/lecture"] },
   { label: "Gallery", href: "gallery", paths: ["/gallery"] },
@@ -61,16 +58,16 @@ const navItems = [
       <nav aria-label="Primary navigation">
         {
           navItems.map((item) => item.children ? (
-            <details class="nav-group">
-              <summary class:list={{ active: item.active }}>
-                {item.label}<span aria-hidden="true">⌄</span>
-              </summary>
-              <div class="dropdown">
+            <div class="nav-group">
+              <a href={pageUrl(item.children[0].href)} class:list={{ "nav-label": true, active: item.active }} aria-expanded="false" aria-controls={`nav-${item.label.toLowerCase()}`}>
+                {item.label}
+              </a>
+              <div class="dropdown" id={`nav-${item.label.toLowerCase()}`}>
                 {item.children.map((child) => (
-                  <a href={pageUrl(child.href)}>{child.label}<span aria-hidden="true">↗</span></a>
+                  <a href={pageUrl(child.href)}>{child.label}</a>
                 ))}
               </div>
-            </details>
+            </div>
           ) : (
             <a href={pageUrl(item.href)} aria-current={item.active ? "page" : undefined}>{item.label}</a>
           ))
@@ -78,7 +75,7 @@ const navItems = [
       </nav>
 
       <a class="contact-link" href="mailto:h.yoo@kaist.ac.kr">
-        Contact <span aria-hidden="true">↗</span>
+        Contact
       </a>
     </header>
 
@@ -86,9 +83,9 @@ const navItems = [
 
     <footer class="site-footer">
       <div>
-        <a class="footer-brand" href={pageUrl()} aria-label="BOOM Lab home">
+        <div class="footer-brand">
           <img src={pageUrl("images/boom-logo.png")} alt="BOOM Lab" />
-        </a>
+        </div>
         <p>Biomedical Optics and Optical Metrology Laboratory</p>
       </div>
       <div class="footer-meta">
@@ -99,6 +96,40 @@ const navItems = [
     </footer>
   </body>
 </html>
+
+<script>
+  const groups = document.querySelectorAll<HTMLElement>(".nav-group");
+  groups.forEach((group) => {
+    const toggle = group.querySelector<HTMLAnchorElement>(".nav-label")!;
+    const setOpen = (open: boolean) => toggle.setAttribute("aria-expanded", String(open));
+    group.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse") setOpen(true);
+    });
+    group.addEventListener("pointerleave", (event) => {
+      if (event.pointerType === "mouse") setOpen(false);
+    });
+    group.addEventListener("focusout", (event) => {
+      if (!group.contains(event.relatedTarget as Node)) setOpen(false);
+    });
+    group.querySelector(".nav-label")?.addEventListener("focus", (event) => {
+      if ((event.target as HTMLElement).matches(":focus-visible")) setOpen(true);
+    });
+    group.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown" && event.target === toggle) {
+        event.preventDefault();
+        setOpen(true);
+        group.querySelector<HTMLAnchorElement>(".dropdown a")?.focus();
+      }
+      if (event.key === "Escape") {
+        toggle.focus();
+        setOpen(false);
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!group.contains(event.target as Node)) setOpen(false);
+    });
+  });
+</script>
 
 <style is:global>
   :root {
@@ -139,21 +170,18 @@ const navItems = [
   }
   .brand { display: block; width: max-content; }
   .brand-logo { width: 238px; height: auto; filter: invert(1) hue-rotate(180deg); }
-  nav { display: flex; justify-content: center; align-items: center; gap: clamp(14px, 1.8vw, 28px); }
-  nav > a, .nav-group summary { position: relative; color: #d9e1e6; font-size: 0.83rem; letter-spacing: 0.02em; white-space: nowrap; }
-  nav > a::after, .nav-group summary::after { content: ""; position: absolute; left: 0; bottom: -10px; width: 100%; height: 2px; background: var(--acid); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
-  nav > a:hover::after, nav > a[aria-current="page"]::after, .nav-group summary:hover::after, .nav-group summary.active::after { transform: scaleX(1); transform-origin: left; }
-  .nav-group { position: relative; }
-  .nav-group summary { display: flex; align-items: center; gap: 6px; list-style: none; cursor: pointer; }
-  .nav-group summary::-webkit-details-marker { display: none; }
-  .nav-group summary span { color: var(--acid); font-size: 0.68rem; transition: transform 180ms ease; }
-  .nav-group[open] summary span { transform: rotate(180deg); }
-  .dropdown { position: absolute; top: 32px; left: 50%; min-width: 210px; padding: 9px; background: #0a1a2a; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.28); transform: translateX(-50%); opacity: 0; visibility: hidden; transition: opacity 160ms ease, visibility 160ms ease, transform 160ms ease; }
-  .nav-group[open] .dropdown, .nav-group:hover .dropdown, .nav-group:focus-within .dropdown { opacity: 1; visibility: visible; transform: translate(-50%, 4px); }
-  .dropdown a { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 11px 12px; color: #d9e1e6; font-size: 0.78rem; }
+  nav { display: flex; justify-content: center; align-items: center; gap: 36px; }
+  nav > a, .nav-label { position: relative; color: #d9e1e6; font: inherit; font-size: 1rem; letter-spacing: 0.02em; white-space: nowrap; }
+  nav > a, .nav-label { display: block; padding: 8px 0; }
+  nav > a::after, .nav-label::after { content: ""; position: absolute; left: 0; bottom: -10px; width: 100%; height: 2px; background: var(--acid); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
+  nav > a:hover::after, nav > a[aria-current="page"]::after, .nav-label:hover::after, .nav-label.active::after, .nav-group:has(:focus-visible) .nav-label::after { transform: scaleX(1); transform-origin: left; }
+  .nav-group { position: relative; display: flex; align-items: center; }
+  .nav-group::after { content: ""; position: absolute; top: 100%; left: -14px; width: calc(100% + 28px); height: 22px; }
+  .dropdown { position: absolute; top: calc(100% + 10px); left: 0; min-width: 240px; padding: 9px; background: #0a1a2a; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.28); opacity: 0; visibility: hidden; transition: opacity 160ms ease, visibility 160ms ease; }
+  .nav-group:has(.nav-label[aria-expanded="true"]) .dropdown { opacity: 1; visibility: visible; }
+  .dropdown a { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 11px 12px; color: #d9e1e6; font-size: .94rem; }
   .dropdown a:hover { background: rgba(255,255,255,.06); color: var(--acid); }
-  .dropdown a span { color: var(--acid); }
-  .contact-link { min-width: 108px; display: flex; justify-content: space-between; align-items: center; padding: 11px 14px; border: 1px solid var(--line); border-radius: 99px; font-size: 0.8rem; transition: color 180ms ease, border-color 180ms ease; }
+  .contact-link { min-width: 108px; display: flex; justify-content: center; align-items: center; padding: 11px 14px; border: 1px solid var(--line); border-radius: 99px; font-size: .94rem; transition: color 180ms ease, border-color 180ms ease; }
   .contact-link:hover { color: var(--acid); border-color: var(--acid); }
   .site-footer { width: var(--content); margin: 0 auto; padding: 68px 0 44px; display: flex; justify-content: space-between; gap: 32px; border-top: 1px solid var(--line); }
   .footer-brand { display: block; width: max-content; }
@@ -162,7 +190,7 @@ const navItems = [
   .footer-meta { text-align: right; }
   .footer-meta p { margin: 0 0 4px; }
   :focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; }
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
     :root { --content: min(100% - 40px, 1280px); }
     .site-header { height: auto; min-height: 92px; grid-template-columns: 1fr auto; }
     .site-header nav { grid-column: 1 / -1; order: 3; justify-content: flex-start; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--line); }
@@ -173,8 +201,14 @@ const navItems = [
     .brand-logo { width: 170px; }
     .footer-brand img { width: 210px; }
     .contact-link { min-width: auto; gap: 10px; }
+    #nav-research { left: 0; right: auto; }
+    .dropdown { min-width: 210px; }
+    .site-header nav { gap: 12px 28px; }
     .site-footer { flex-direction: column; padding-top: 48px; }
     .footer-meta { text-align: left; }
+  }
+  @media (pointer: coarse) {
+    .dropdown { min-width: 210px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

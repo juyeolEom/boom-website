@@ -7,66 +7,77 @@
           "id": "seung-eon-lee",
           "englishName": "Seung Eon Lee, M.S.",
           "image": "images/people/seung-eon-lee.webp",
-          "alternateImage": "images/people/seung-eon-lee-alternate.webp"
+          "alternateImage": "images/people/seung-eon-lee-alternate.webp",
+          "email": "lseon945@kaist.ac.kr"
         },
         {
           "id": "soonyong-kwon",
           "englishName": "Soonyong Kwon, M.S.",
           "image": "images/people/soonyong-kwon.webp",
-          "alternateImage": "images/people/soonyong-kwon-alternate.webp"
+          "alternateImage": "images/people/soonyong-kwon-alternate.webp",
+          "email": "tnsdyd33@kaist.ac.kr"
         },
         {
           "id": "minseok-jang",
           "englishName": "Minseok Jang, M.S.",
           "image": "images/people/minseok-jang.webp",
-          "alternateImage": "images/people/minseok-jang-alternate.webp"
+          "alternateImage": "images/people/minseok-jang-alternate.webp",
+          "email": "msjang98@kaist.ac.kr"
         },
         {
           "id": "youngeun-cho",
           "englishName": "Youngeun Cho, M.S.",
           "image": "images/people/youngeun-cho.webp",
-          "alternateImage": "images/people/youngeun-cho-alternate.webp"
+          "alternateImage": "images/people/youngeun-cho-alternate.webp",
+          "email": "ingin99@kaist.ac.kr"
         },
         {
           "id": "wonjin-kim",
           "englishName": "Wonjin Kim, M.S.",
-          "image": "images/people/wonjin-kim.webp"
+          "image": "images/people/wonjin-kim.webp",
+          "email": "wonjkim@kaist.ac.kr"
         },
         {
           "id": "hwijun-koo",
           "englishName": "Hwijun Koo, M.S.",
           "image": "images/people/hwijun-koo.webp",
-          "alternateImage": "images/people/hwijun-koo-alternate.webp"
+          "alternateImage": "images/people/hwijun-koo-alternate.webp",
+          "email": "kuhj1014@kaist.ac.kr"
         },
         {
           "id": "juyeol-eom",
           "englishName": "Juyeol Eom, M.S.",
           "image": "images/people/juyeol-eom.webp",
-          "alternateImage": "images/people/juyeol-eom-alternate.webp"
+          "alternateImage": "images/people/juyeol-eom-alternate.webp",
+          "email": "srs0714@kaist.ac.kr"
         },
         {
           "id": "hyeon-jun-kim",
           "englishName": "Hyeon Jun Kim, M.S.",
           "image": "images/people/hyeon-jun-kim.webp",
-          "alternateImage": "images/people/hyeon-jun-kim-alternate.webp"
+          "alternateImage": "images/people/hyeon-jun-kim-alternate.webp",
+          "email": "eila35@kaist.ac.kr"
         },
         {
           "id": "jeongeun-park",
           "englishName": "Jeongeun Park, M.S.",
           "image": "images/people/jeongeun-park.webp",
-          "alternateImage": "images/people/jeongeun-park-alternate.webp"
+          "alternateImage": "images/people/jeongeun-park-alternate.webp",
+          "email": "parkje@kaist.ac.kr"
         },
         {
           "id": "hyung-beom-kim",
           "englishName": "Hyung Beom Kim, M.S.",
           "image": "images/people/hyung-beom-kim.webp",
-          "alternateImage": "images/people/hyung-beom-kim-alternate.webp"
+          "alternateImage": "images/people/hyung-beom-kim-alternate.webp",
+          "email": "hb.kim@kaist.ac.kr"
         },
         {
           "id": "ilkyu-park",
           "englishName": "Ilkyu Park, M.S.",
           "image": "images/people/ilkyu-park.webp",
-          "alternateImage": "images/people/ilkyu-park-alternate.webp"
+          "alternateImage": "images/people/ilkyu-park-alternate.webp",
+          "email": "ilkyu.park@kaist.ac.kr"
         }
       ]
     },
@@ -77,13 +88,15 @@
           "id": "seohyoung-jeon",
           "englishName": "Seohyoung Jeon",
           "image": "images/people/seohyoung-jeon.webp",
-          "alternateImage": "images/people/seohyoung-jeon-alternate.webp"
+          "alternateImage": "images/people/seohyoung-jeon-alternate.webp",
+          "email": "shjeon2311@kaist.ac.kr"
         },
         {
           "id": "min-jae-lee",
           "englishName": "Min Jae Lee",
           "image": "images/people/min-jae-lee.webp",
-          "alternateImage": "images/people/min-jae-lee-alternate.webp"
+          "alternateImage": "images/people/min-jae-lee-alternate.webp",
+          "email": "dlalswo516@kaist.ac.kr"
         }
       ]
     },
@@ -93,7 +106,8 @@
         {
           "id": "youmin-lee",
           "englishName": "Youmin Lee",
-          "image": "images/people/youmin-lee.webp"
+          "image": "images/people/youmin-lee.webp",
+          "email": "youmin0404@kaist.ac.kr"
         }
       ]
     }
