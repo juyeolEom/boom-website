@@ -8,30 +8,43 @@ const pageUrl = (path = "") => `${base}/${path}`;
 ---
 
 <Layout title={`${title} | BOOM Lab`} description={description}>
-  <PageIntro eyebrow="People" title={title} description={description} />
+  <PageIntro eyebrow="People" title={title} />
 
   <div class="directory-shell">
     {sections.map((section, sectionIndex) => (
       <section class="member-section" aria-labelledby={`member-section-${sectionIndex}`}>
         <header class="section-heading">
-          <div>
-            <span>{String(sectionIndex + 1).padStart(2, "0")}</span>
-            <h2 id={`member-section-${sectionIndex}`}>{section.title}</h2>
-          </div>
+          <h2 id={`member-section-${sectionIndex}`}>{section.title}</h2>
           <p>{section.members.length} {section.members.length === 1 ? "member" : "members"}</p>
         </header>
 
         <ul class="member-grid">
           {section.members.map((member) => (
             <li class="member-card">
-              <div class="portrait">
-                <img src={pageUrl(member.image)} alt={`${member.koreanName} placeholder portrait`} loading="lazy" />
-              </div>
-              <strong class="korean-name" lang="ko">{member.koreanName}</strong>
-              <span class="english-name">{member.englishName}</span>
-              {member.email && <span class="email">{member.email}</span>}
-              {member.degree && <span class="degree">{member.degree}</span>}
+              {member.alternateImage ? (
+                <button class="portrait portrait-switch" type="button" aria-label={`Show alternate portrait of ${member.englishName}`} aria-pressed="false">
+                  <img src={pageUrl(member.image)} alt={member.englishName} width="160" height="200" loading="lazy" decoding="async" />
+                  <img class="alternate" src={pageUrl(member.alternateImage)} alt="" width="160" height="200" loading="lazy" decoding="async" />
+                </button>
+              ) : (
+                <div class:list={["portrait", { "photo-missing": member.photoMissing }]}>
+                  <img src={pageUrl(member.image)} alt={member.photoMissing ? `Portrait unavailable for ${member.englishName}` : member.englishName} width="160" height="200" loading="lazy" decoding="async" />
+                </div>
+              )}
+              <h3 class="english-name">{member.englishName}</h3>
+              {member.email && <a class="email" href={`mailto:${member.email}`}>{member.email}</a>}
               {member.currentPosition && <p class="current-position">{member.currentPosition}</p>}
+              {member.degree && <p class="degree">{member.degree}</p>}
+              {member.history?.length > 0 && (
+                <details class="career">
+                  <summary>Career &amp; Education</summary>
+                  <ol>
+                    {member.history.map((entry) => (
+                      <li><span class="period">{entry.period}</span><span>{entry.description}</span></li>
+                    ))}
+                  </ol>
+                </details>
+              )}
             </li>
           ))}
         </ul>
@@ -45,21 +58,33 @@ const pageUrl = (path = "") => `${base}/${path}`;
   .member-section { padding: 96px 0 108px; border-bottom: 1px solid #ccd4d2; }
   .member-section:last-child { border-bottom: 0; }
   .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-bottom: 58px; }
-  .section-heading > div { display: flex; align-items: baseline; gap: 18px; }
-  .section-heading span { color: #4d686c; font-size: .72rem; font-weight: 800; letter-spacing: .12em; }
   .section-heading h2 { margin: 0; font-size: clamp(2.1rem, 4vw, 3.8rem); line-height: 1; letter-spacing: -.05em; }
   .section-heading p { margin: 0 0 5px; color: #637377; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
   .member-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 62px 34px; margin: 0; padding: 0; list-style: none; }
-  .member-card { min-width: 0; text-align: center; }
-  .portrait { width: clamp(94px, 9vw, 124px); aspect-ratio: 1; margin: 0 auto 20px; overflow: hidden; border-radius: 50%; background: var(--white); border: 1px solid #d4dcda; transition: transform 180ms ease, border-color 180ms ease; }
-  .portrait img { width: 100%; height: 100%; padding: 13%; object-fit: contain; }
-  .member-card:hover .portrait { transform: translateY(-4px); border-color: #799497; }
-  .member-card strong, .member-card span { display: block; overflow-wrap: anywhere; }
-  .korean-name { margin-bottom: 4px; font-size: 1rem; font-weight: 750; }
-  .english-name { margin-bottom: 8px; color: #43575b; font-size: .88rem; }
-  .email, .degree { color: #6b797c; font-size: .76rem; }
-  .degree { font-weight: 700; letter-spacing: .02em; }
-  .current-position { max-width: 180px; min-height: 2.9em; margin: 11px auto 0; padding-top: 10px; border-top: 1px solid #d7dedc; color: #43575b; font-size: .76rem; line-height: 1.45; }
+  .member-card { min-width: 0; overflow-wrap: anywhere; }
+  .portrait { position: relative; display: block; width: 160px; max-width: 100%; aspect-ratio: 4 / 5; margin: 0 0 18px; padding: 0; overflow: hidden; border: 0; border-radius: 0; background: var(--white); }
+  .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .portrait-switch { cursor: pointer; }
+  .portrait-switch:focus-visible { outline: 2px solid #43575b; outline-offset: 4px; }
+  .portrait .alternate { position: absolute; inset: 0; opacity: 0; transition: opacity 180ms ease; }
+  .portrait-switch[aria-pressed="true"] .alternate { opacity: 1; }
+  @media (hover: hover) and (pointer: fine) {
+    .portrait-switch:hover .alternate { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .portrait .alternate { transition: none; }
+  }
+  .photo-missing img { object-fit: contain; padding: 16px; }
+  .english-name { margin: 0 0 14px; color: var(--ink); font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+  .email, .degree { color: #52676b; font-size: .8rem; line-height: 1.6; }
+  .email:hover { text-decoration: underline; }
+  .degree { margin: 8px 0 16px; }
+  .current-position { margin: 12px 0 8px; color: #43575b; font-size: .88rem; line-height: 1.6; }
+  .career { margin-top: 12px; color: #43575b; font-size: .8rem; line-height: 1.6; }
+  .career summary { padding: 10px 0; cursor: pointer; }
+  .career ol { display: grid; gap: 16px; margin: 6px 0 0; padding: 0; list-style: none; }
+  .career span { display: block; }
+  .period { margin-bottom: 3px; color: #637377; font-size: .75rem; }
   @media (max-width: 980px) {
     .directory-shell { padding-inline: 20px; }
     .member-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -72,7 +97,19 @@ const pageUrl = (path = "") => `${base}/${path}`;
   @media (max-width: 480px) {
     .section-heading { align-items: flex-start; flex-direction: column; margin-bottom: 44px; }
     .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .portrait { width: 96px; }
-    .email, .degree, .current-position { font-size: .7rem; }
+  }
+  @media (max-width: 350px) {
+    .member-grid { grid-template-columns: minmax(0, 1fr); }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>(".portrait-switch").forEach((button) => {
+    button.addEventListener("click", () => {
+      button.setAttribute("aria-pressed", String(button.getAttribute("aria-pressed") !== "true"));
+    });
+    button.addEventListener("pointerleave", (event) => {
+      if (event.pointerType === "mouse") button.setAttribute("aria-pressed", "false");
+    });
+  });
+</script>

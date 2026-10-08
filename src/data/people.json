@@ -1,0 +1,518 @@
+{
+  "students": [
+    {
+      "title": "Ph.D. Candidates",
+      "members": [
+        {
+          "id": "seung-eon-lee",
+          "englishName": "Seung Eon Lee, M.S.",
+          "image": "images/people/seung-eon-lee.webp",
+          "alternateImage": "images/people/seung-eon-lee-alternate.webp"
+        },
+        {
+          "id": "soonyong-kwon",
+          "englishName": "Soonyong Kwon, M.S.",
+          "image": "images/people/soonyong-kwon.webp",
+          "alternateImage": "images/people/soonyong-kwon-alternate.webp"
+        },
+        {
+          "id": "minseok-jang",
+          "englishName": "Minseok Jang, M.S.",
+          "image": "images/people/minseok-jang.webp",
+          "alternateImage": "images/people/minseok-jang-alternate.webp"
+        },
+        {
+          "id": "youngeun-cho",
+          "englishName": "Youngeun Cho, M.S.",
+          "image": "images/people/youngeun-cho.webp",
+          "alternateImage": "images/people/youngeun-cho-alternate.webp"
+        },
+        {
+          "id": "wonjin-kim",
+          "englishName": "Wonjin Kim, M.S.",
+          "image": "images/people/wonjin-kim.webp"
+        },
+        {
+          "id": "hwijun-koo",
+          "englishName": "Hwijun Koo, M.S.",
+          "image": "images/people/hwijun-koo.webp",
+          "alternateImage": "images/people/hwijun-koo-alternate.webp"
+        },
+        {
+          "id": "juyeol-eom",
+          "englishName": "Juyeol Eom, M.S.",
+          "image": "images/people/juyeol-eom.webp",
+          "alternateImage": "images/people/juyeol-eom-alternate.webp"
+        },
+        {
+          "id": "hyeon-jun-kim",
+          "englishName": "Hyeon Jun Kim, M.S.",
+          "image": "images/people/hyeon-jun-kim.webp",
+          "alternateImage": "images/people/hyeon-jun-kim-alternate.webp"
+        },
+        {
+          "id": "jeongeun-park",
+          "englishName": "Jeongeun Park, M.S.",
+          "image": "images/people/jeongeun-park.webp",
+          "alternateImage": "images/people/jeongeun-park-alternate.webp"
+        },
+        {
+          "id": "hyung-beom-kim",
+          "englishName": "Hyung Beom Kim, M.S.",
+          "image": "images/people/hyung-beom-kim.webp",
+          "alternateImage": "images/people/hyung-beom-kim-alternate.webp"
+        },
+        {
+          "id": "ilkyu-park",
+          "englishName": "Ilkyu Park, M.S.",
+          "image": "images/people/ilkyu-park.webp",
+          "alternateImage": "images/people/ilkyu-park-alternate.webp"
+        }
+      ]
+    },
+    {
+      "title": "M.S. Candidates",
+      "members": [
+        {
+          "id": "seohyoung-jeon",
+          "englishName": "Seohyoung Jeon",
+          "image": "images/people/seohyoung-jeon.webp",
+          "alternateImage": "images/people/seohyoung-jeon-alternate.webp"
+        },
+        {
+          "id": "min-jae-lee",
+          "englishName": "Min Jae Lee",
+          "image": "images/people/min-jae-lee.webp",
+          "alternateImage": "images/people/min-jae-lee-alternate.webp"
+        }
+      ]
+    },
+    {
+      "title": "Researchers",
+      "members": [
+        {
+          "id": "youmin-lee",
+          "englishName": "Youmin Lee",
+          "image": "images/people/youmin-lee.webp"
+        }
+      ]
+    }
+  ],
+  "alumni": [
+    {
+      "id": "yeon-hoon-kim",
+      "englishName": "Yeon Hoon Kim, Ph.D.",
+      "image": "images/people/yeon-hoon-kim.webp",
+      "history": [
+        {
+          "period": "2026–Present",
+          "description": "Researcher, KRIBB"
+        },
+        {
+          "period": "2025–2026",
+          "description": "Post-doctoral Researcher, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2019–2025",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2017–2019",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Researcher, KRIBB",
+      "degree": "Ph.D. 2025 · KAIST"
+    },
+    {
+      "id": "hyeong-soo-nam",
+      "englishName": "Hyeong Soo Nam, Ph.D.",
+      "image": "images/people/hyeong-soo-nam.webp",
+      "history": [
+        {
+          "period": "2026–Present",
+          "description": "Assistant Professor, Dept. Artificial Intelligence and Biomedical Engineering, Catholic University"
+        },
+        {
+          "period": "2019–2026",
+          "description": "Research Professor, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2016–2019",
+          "description": "Ph.D, Dept. Biomedical Engineering, Hanyang University"
+        },
+        {
+          "period": "2014–2016",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Assistant Professor, Dept. Artificial Intelligence and Biomedical Engineering, Catholic University",
+      "degree": "Ph.D. 2019 · Hanyang University"
+    },
+    {
+      "id": "jeongmoo-han",
+      "englishName": "Jeongmoo Han, Ph.D.",
+      "image": "images/people/jeongmoo-han.webp",
+      "history": [
+        {
+          "period": "2026–Present",
+          "description": "Post-doctoral Researcher, Mechanican Engineering, MIT"
+        },
+        {
+          "period": "2024–2026",
+          "description": "Post-doctoral Researcher, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2020–2024",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2018–2020",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Post-doctoral Researcher, Mechanican Engineering, MIT",
+      "degree": "Ph.D. 2024 · KAIST"
+    },
+    {
+      "id": "jeonggeun-song",
+      "englishName": "Jeonggeun Song, Ph.D.",
+      "image": "images/people/jeonggeun-song.webp",
+      "history": [
+        {
+          "period": "2026–Present",
+          "description": "Researcher, Hanhwa Systems"
+        },
+        {
+          "period": "2025–2026",
+          "description": "Post-doctoral Researcher, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2021–2025",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2019–2021",
+          "description": "M.S, Mechanical Engineering, KAIST"
+        }
+      ],
+      "currentPosition": "Researcher, Hanhwa Systems",
+      "degree": "Ph.D. 2025 · KAIST"
+    },
+    {
+      "id": "ungyo-kang",
+      "englishName": "Ungyo Kang, Ph.D.",
+      "image": "images/people/ungyo-kang.webp",
+      "history": [
+        {
+          "period": "2019–2026",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2017–2019",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "degree": "Ph.D. 2026 · KAIST"
+    },
+    {
+      "id": "woojin-lee",
+      "englishName": "Woojin Lee, Ph.D.",
+      "image": "images/people/woojin-lee.webp",
+      "history": [
+        {
+          "period": "2026–Present",
+          "description": "Researcher, Samsung electronics, Semiconductor Research Institute"
+        },
+        {
+          "period": "2022–2026",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2020–2022",
+          "description": "M.S, Mechanical Engineering, KAIST"
+        }
+      ],
+      "currentPosition": "Researcher, Samsung electronics, Semiconductor Research Institute",
+      "degree": "Ph.D. 2026 · KAIST"
+    },
+    {
+      "id": "gyeongho-kim",
+      "englishName": "Gyeongho Kim, M.S.",
+      "image": "images/people/gyeongho-kim.webp",
+      "history": [
+        {
+          "period": "2026–Present",
+          "description": "SK Hynix"
+        },
+        {
+          "period": "2026–2026",
+          "description": "LG Display"
+        },
+        {
+          "period": "2024–2026",
+          "description": "M.S, Mechanical Engineering, KAIST"
+        }
+      ],
+      "currentPosition": "SK Hynix",
+      "degree": "M.S. 2026 · KAIST"
+    },
+    {
+      "id": "jinsu-choi",
+      "englishName": "Jinsu Choi, Ph.D.",
+      "image": "images/people/jinsu-choi.webp",
+      "history": [
+        {
+          "period": "2025–Present",
+          "description": "Researcher, KIMM"
+        },
+        {
+          "period": "2021–2025",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        },
+        {
+          "period": "2019–2021",
+          "description": "M.S, Mechanical Engineering, KAIST"
+        }
+      ],
+      "currentPosition": "Researcher, KIMM",
+      "degree": "Ph.D. 2025 · KAIST"
+    },
+    {
+      "id": "minsuk-lee",
+      "englishName": "Minsuk Lee, Ph.D.",
+      "image": "images/people/minsuk-lee.webp",
+      "history": [
+        {
+          "period": "2025–Present",
+          "description": "Senior Researcher, Osong medical innovation foundation"
+        },
+        {
+          "period": "2021–2025",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        }
+      ],
+      "currentPosition": "Senior Researcher, Osong medical innovation foundation",
+      "degree": "Ph.D. 2025 · KAIST"
+    },
+    {
+      "id": "jinsoo-choi",
+      "englishName": "Jinsoo Choi, Ph.D.",
+      "image": "images/people/jinsoo-choi.webp",
+      "history": [
+        {
+          "period": "2024–Present",
+          "description": "Researcher, KIMM"
+        },
+        {
+          "period": "2021–2024",
+          "description": "Ph.D, Mechanical Engineering, KAIST"
+        }
+      ],
+      "currentPosition": "Researcher, KIMM",
+      "degree": "Ph.D. 2024 · KAIST"
+    },
+    {
+      "id": "jin-hwan-hwang",
+      "englishName": "Jin Hwan Hwang, M.S.",
+      "image": "images/people/jin-hwan-hwang.webp",
+      "history": [
+        {
+          "period": "2024–Present",
+          "description": "Samsung electronics, MX"
+        },
+        {
+          "period": "2022–2024",
+          "description": "M.S, Mechanical Engineering, KAIST"
+        }
+      ],
+      "currentPosition": "Samsung electronics, MX",
+      "degree": "M.S. 2024 · KAIST"
+    },
+    {
+      "id": "jue-hyung-kang",
+      "englishName": "Jue Hyung Kang, Ph.D.",
+      "image": "images/people/jue-hyung-kang.webp",
+      "history": [
+        {
+          "period": "2021–Present",
+          "description": "Researcher, Samsung Electronics, Semiconductor Research Institute"
+        },
+        {
+          "period": "2017–2021",
+          "description": "Ph.D, Dept. Biomedical Engineering, Hanyang University"
+        },
+        {
+          "period": "2015–2017",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Researcher, Samsung Electronics, Semiconductor Research Institute",
+      "degree": "Ph.D. 2021 · Hanyang University"
+    },
+    {
+      "id": "bomi-gweon",
+      "englishName": "Bomi Gweon, Ph.D.",
+      "image": "images/people/bomi-gweon.webp",
+      "history": [
+        {
+          "period": "2019–Present",
+          "description": "Assistant Professor, Sejong University"
+        },
+        {
+          "period": "2014–2019",
+          "description": "Research Professor, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Assistant Professor, Sejong University"
+    },
+    {
+      "id": "jun-young-kim",
+      "englishName": "Jun Young Kim, Ph.D.",
+      "image": "images/people/jun-young-kim.webp",
+      "history": [
+        {
+          "period": "2024–Present",
+          "description": "Senior Optical Systems Engineer, Intelon Optics"
+        },
+        {
+          "period": "2019–2024",
+          "description": "Post-doctoral Researcher, Wellman Center for Photomedicine, Harvard Medical School and Massachusetts General Hospital Boston"
+        },
+        {
+          "period": "2015–2019",
+          "description": "Ph.D, Dept. Biomedical Engineering, Hanyang University"
+        },
+        {
+          "period": "2013–2015",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Senior Optical Systems Engineer, Intelon Optics",
+      "degree": "Ph.D. 2019 · Hanyang University"
+    },
+    {
+      "id": "min-woo-lee",
+      "englishName": "Min Woo Lee, Ph.D.",
+      "image": "images/people/min-woo-lee.webp",
+      "history": [
+        {
+          "period": "2021–Present",
+          "description": "Research Director, Dotter Inc."
+        },
+        {
+          "period": "2019–2021",
+          "description": "Researcher, KIST"
+        },
+        {
+          "period": "2015–2019",
+          "description": "Ph.D, Dept. Biomedical Engineering, Hanyang University"
+        },
+        {
+          "period": "2013–2015",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Research Director, Dotter Inc.",
+      "degree": "Ph.D. 2019 · Hanyang University"
+    },
+    {
+      "id": "chang-soo-kim",
+      "englishName": "Chang-Soo Kim, Ph.D.",
+      "image": "images/people/chang-soo-kim.webp",
+      "history": [
+        {
+          "period": "Present",
+          "description": "Researcher, Nexensor"
+        },
+        {
+          "period": "2014–2020",
+          "description": "Integrated M.S. & Ph.D, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Researcher, Nexensor",
+      "degree": "Ph.D. 2020 · Hanyang University"
+    },
+    {
+      "id": "jing-chao-xing",
+      "englishName": "Jing Chao Xing, Ph.D.",
+      "image": "images/people/jing-chao-xing.webp",
+      "history": [
+        {
+          "period": "2024–Present",
+          "description": "Diligine Photonics Co., Ltd"
+        },
+        {
+          "period": "2020–2024",
+          "description": "Researcher, Institute of Semiconductors, Guangdong Academy of Sciences"
+        },
+        {
+          "period": "2016–2020",
+          "description": "Ph.D, Dept. Biomedical Engineering, Hanyang University"
+        },
+        {
+          "period": "2014–2016",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "Diligine Photonics Co., Ltd",
+      "degree": "Ph.D. 2020 · Hanyang University"
+    },
+    {
+      "id": "yu-jin-shin",
+      "englishName": "Yu Jin Shin, M.S.",
+      "image": "images/people/yu-jin-shin.webp",
+      "history": [
+        {
+          "period": "2014–2019",
+          "description": "Researcher, Dept. Biomedical Engineering, Hanyang University"
+        },
+        {
+          "period": "2015–2017",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "degree": "M.S. 2017 · Hanyang University"
+    },
+    {
+      "id": "woo-seop-kim",
+      "englishName": "Woo Seop Kim, M.S.",
+      "image": "images/people/woo-seop-kim.webp",
+      "history": [
+        {
+          "period": "2017–2019",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "degree": "M.S. 2019 · Hanyang University"
+    },
+    {
+      "id": "yun-jeong-jeong",
+      "englishName": "Yun Jeong Jeong, M.S.",
+      "image": "images/people/yun-jeong-jeong.webp",
+      "history": [
+        {
+          "period": "2014–2019",
+          "description": "Researcher, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ]
+    },
+    {
+      "id": "zeyuan-li",
+      "englishName": "Zeyuan Li, M.S.",
+      "image": "images/people/zeyuan-li.webp",
+      "history": [
+        {
+          "period": "Present",
+          "description": "JS Global CO. LTD"
+        },
+        {
+          "period": "2015–2017",
+          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+        }
+      ],
+      "currentPosition": "JS Global CO. LTD",
+      "degree": "M.S. 2017 · Hanyang University"
+    }
+  ]
+}

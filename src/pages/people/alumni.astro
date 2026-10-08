@@ -1,15 +1,7 @@
 ---
 import PeopleDirectory from "../../components/PeopleDirectory.astro";
-
-const alumni = Array.from({ length: 17 }, () => ({
-  koreanName: "넙죽이",
-  englishName: "Nupzuk",
-  degree: "PhD. 2024",
-  currentPosition: "Current position",
-  image: "images/Nupzuk.png",
-}));
-
-const sections = [{ title: "Alumni", members: alumni }];
+import people from "../../data/people.json";
+const sections = [{ title: "Alumni", members: people.alumni }];
 ---
 
 <PeopleDirectory
