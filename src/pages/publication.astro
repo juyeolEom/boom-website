@@ -1,5 +1,66 @@
 ---
-import SimplePage from "../components/SimplePage.astro";
+import Layout from "../layouts/Layout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import publications from "../data/publications.json";
+import videos from "../data/video-abstracts.json";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const videoByPublication = new Map(videos.map((video) => [video.publicationNumber, video.videoId]));
+
+const years = [...new Set(publications.map((publication) => publication.year))].filter((year) => year > 2009).sort((a, b) => b - a);
+const groups = [
+  ...years.map((year) => ({ label: String(year), publications: publications.filter((publication) => publication.year === year) })),
+  { label: "2004–2009", publications: publications.filter((publication) => publication.year <= 2009) },
+];
 ---
 
-<SimplePage title="Publication" eyebrow="Research output" description="Journal articles and other publications from BOOM Lab." />
+<Layout title="Publication | BOOM Lab" description="Publications from BOOM Lab, listed by year from newest to oldest.">
+  <PageIntro title="Publication" eyebrow="Research output" />
+  <div class="publications">
+    {groups.map((group) => (
+      <section class="publication-year" aria-labelledby={`year-${group.label}`}>
+        <h2 id={`year-${group.label}`}>{group.label}</h2>
+        <ol reversed start={group.publications[0].number}>
+          {group.publications.map((publication) => (
+            <li value={publication.number} id={`publication-${publication.number}`}>
+              <p class="authors">{publication.authors}</p>
+              <p class="paper-title">{publication.title}</p>
+              <p class="citation">
+                {publication.doi ? <>
+                  {publication.citation.slice(0, publication.citation.indexOf(publication.doi))}
+                  <a href={`https://doi.org/${publication.doi}`} target="_blank" rel="noopener noreferrer">{publication.doi}</a>
+                  {publication.citation.slice(publication.citation.indexOf(publication.doi) + publication.doi.length)}
+                </> : publication.citation}
+              </p>
+              {videoByPublication.has(publication.number) && <a class="video-link" href={`${base}/publication/videos#video-${videoByPublication.get(publication.number)}`}>▶ Video abstract</a>}
+              {publication.notes.map((note) => (
+                <p class="note">{note.split(/(https?:\/\/[^\s)]+)/).map((part) => /^https?:\/\//.test(part) ? <a href={part} target="_blank" rel="noopener noreferrer">{part}</a> : part)}</p>
+              ))}
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  .publications { padding: 64px max(32px, calc((100vw - 1120px) / 2)) 120px; background: var(--paper); color: var(--ink); }
+  .publication-year + .publication-year { margin-top: 54px; }
+  h2 { margin: 0 0 28px; padding-bottom: 14px; border-bottom: 1px solid #cbd5d2; font-size: 1.8rem; font-weight: 600; }
+  ol { margin: 0; padding-left: 2.8rem; }
+  li { padding-left: 12px; margin-bottom: 28px; font-size: 1rem; line-height: 1.75; overflow-wrap: anywhere; }
+  li::marker { color: #52676b; font-variant-numeric: tabular-nums; }
+  p { margin: 0; }
+  .authors { color: #52676b; }
+  .paper-title { margin: 3px 0; font-weight: 600; }
+  .citation { color: #43575b; }
+  .note { margin-top: 6px; color: #52676b; font-size: .9rem; }
+  .video-link { display: inline-block; margin-top: 6px; font-size: .9rem; }
+  a { color: #17617b; text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: #0b3c50; }
+  a:focus-visible { outline-color: #17617b; }
+  @media (max-width: 600px) {
+    .publications { padding: 42px 20px 72px; }
+    li { padding-left: 5px; }
+  }
+</style>

@@ -1,0 +1,9 @@
+---
+import ResearchPage from "../../components/ResearchPage.astro";
+import { researchAreas } from "../../data/research";
+export function getStaticPaths() {
+  return researchAreas.map((area) => ({ params: { area: area.slug }, props: { area } }));
+}
+const { area } = Astro.props;
+---
+<ResearchPage area={area} />

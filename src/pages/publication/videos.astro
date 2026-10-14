@@ -1,0 +1,122 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import videos from "../../data/video-abstracts.json";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Layout title="Video Abstracts | BOOM Lab" description="Short video introductions and abstracts for BOOM Lab publications.">
+  <PageIntro title="Video Abstracts" eyebrow="Publication" />
+  <div class="video-library">
+    <div class="library-links">
+      <a href={`${base}/publication`}>All publications</a>
+      <a href="https://www.youtube.com/@boomlab.369" target="_blank" rel="noopener noreferrer">BOOM Lab on YouTube</a>
+    </div>
+    <ul class="video-grid" aria-label="Select a video abstract">
+      {videos.map((video) => (
+        <li><a class="video-card" href={`#video-${video.videoId}`} data-video={video.videoId}>
+          <div class="thumbnail"><img src={`https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy" /><span aria-hidden="true">▶</span></div>
+          <span class="year">{video.year}</span>
+          <h2>{video.title}</h2>
+        </a></li>
+      ))}
+    </ul>
+    <div class="video-details">
+      {videos.map((video) => (
+        <section id={`video-${video.videoId}`} class="video-detail" aria-labelledby={`title-${video.videoId}`} hidden>
+          <p class="year">{video.year} · Video abstract</p>
+          <h2 id={`title-${video.videoId}`}>{video.title}</h2>
+          <div class="player" data-id={video.videoId} data-title={video.title}>
+            <button class="play-video" type="button" aria-label={`Play ${video.title}`}>
+              <img src={`https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy" />
+              <span>▶ Play video</span>
+            </button>
+          </div>
+          <div class="paper-links">
+            <a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+            <a href={`${base}/publication#publication-${video.publicationNumber}`}>Publication #{video.publicationNumber}</a>
+            <a href={`https://doi.org/${video.doi}`} target="_blank" rel="noopener noreferrer">DOI: {video.doi}</a>
+          </div>
+          <div class="abstract">
+            <h3>Abstract</h3>
+            {video.abstract.map((part) => <p>{part.label && <strong>{part.label}. </strong>}{part.text}</p>)}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const sections = [...document.querySelectorAll<HTMLElement>(".video-detail")];
+  function play(section: HTMLElement) {
+    const player = section.querySelector<HTMLElement>(".player")!;
+    if (player.querySelector("iframe")) return;
+    const frame = document.createElement("iframe");
+    frame.src = `https://www.youtube-nocookie.com/embed/${player.dataset.id}?autoplay=1&playsinline=1&rel=0`;
+    frame.title = player.dataset.title!;
+    frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    frame.allowFullscreen = true;
+    frame.referrerPolicy = "strict-origin-when-cross-origin";
+    player.querySelector<HTMLButtonElement>("button")!.hidden = true;
+    player.append(frame);
+  }
+  function select(id: string, scroll = false) {
+    const selected = sections.find((section) => section.id === id);
+    for (const section of sections) {
+      section.hidden = section !== selected;
+      if (section !== selected) {
+        section.querySelector("iframe")?.remove();
+        section.querySelector<HTMLButtonElement>(".play-video")!.hidden = false;
+      }
+    }
+    document.querySelectorAll<HTMLAnchorElement>(".video-card").forEach((card) => {
+      if (card.hash === `#${selected?.id}`) card.setAttribute("aria-current", "true");
+      else card.removeAttribute("aria-current");
+    });
+    if (scroll && selected) selected.scrollIntoView({ behavior: "instant", block: "start" });
+  }
+  document.querySelectorAll<HTMLAnchorElement>(".video-card").forEach((card) => {
+    card.addEventListener("click", (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      history.pushState(null, "", card.hash);
+      select(card.hash.slice(1), true);
+      const heading = document.getElementById(`title-${card.dataset.video}`)!;
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+    });
+  });
+  sections.forEach((section) => section.querySelector(".play-video")!.addEventListener("click", () => play(section)));
+  const followHash = () => select(location.hash.slice(1), Boolean(location.hash));
+  window.addEventListener("hashchange", followHash);
+  followHash();
+</script>
+
+<style>
+  .video-library { background: var(--paper); color: var(--ink); padding: 40px max(32px, calc((100vw - 1200px) / 2)) 100px; }
+  .library-links, .paper-links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+  .library-links { justify-content: space-between; margin-bottom: 36px; }
+  .library-links a, .paper-links a { color: #17617b; text-decoration: underline; text-underline-offset: 3px; }
+  .video-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 28px; padding: 0; margin: 0 0 60px; list-style: none; }
+  .thumbnail { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #102631; }
+  .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+  .thumbnail span { position: absolute; bottom: 12px; left: 12px; background: #04101c; color: white; padding: 6px 14px; border-radius: 4px; }
+  .year { display: block; color: #52676b; font-size: .9rem; margin: 14px 0 8px; }
+  .video-card h2 { font-size: 1.05rem; line-height: 1.5; margin: 0; font-weight: 600; }
+  .video-card:hover h2, .video-card[aria-current] h2 { text-decoration: underline; text-underline-offset: 4px; }
+  .video-detail { max-width: 920px; margin: auto; padding-top: 30px; border-top: 1px solid #cbd5d2; scroll-margin-top: 24px; }
+  .video-detail h2 { font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; margin: 0 0 26px; }
+  .player { width: 100%; aspect-ratio: 16 / 9; min-height: 200px; position: relative; background: #04101c; }
+  .play-video { display: block; position: relative; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: transparent; }
+  .play-video[hidden] { display: none; }
+  .play-video img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 9; min-height: 200px; }
+  .play-video span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 14px 22px; color: white; background: #04101ce8; font: 600 1rem/1.5 Arial, sans-serif; white-space: nowrap; }
+  .player :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .paper-links { margin: 20px 0 36px; font-size: .9rem; overflow-wrap: anywhere; }
+  .abstract h3 { font-size: 1.3rem; margin: 0 0 20px; }
+  .abstract p { font-size: 1.05rem; line-height: 1.85; color: #43575b; margin: 0 0 20px; }
+  a:focus-visible, button:focus-visible { outline-color: #17617b; }
+  @media (max-width: 850px) { .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 540px) { .video-library { padding: 28px 20px 70px; } .video-grid { grid-template-columns: 1fr; } }
+</style>

@@ -6,42 +6,28 @@ const pageUrl = (path = "") => `${base}/${path}`;
 
 // 나중에 이미지를 바꿀 때는 public/images 안의 같은 파일명만 덮어쓰면 됩니다.
 const images = {
-  hero: pageUrl("images/boom-hero.png"),
-  microscopy: pageUrl("images/research-microscopy.png"),
-  lightSheet: pageUrl("images/research-light-sheet.png"),
+  hero: pageUrl("images/main-page.avif"),
+  microscopy: pageUrl("images/research/brain-microscopy.webp"),
+  lightSheet: pageUrl("images/research/surface-metrology.webp"),
 };
 
 const researchAreas = [
-  { number: "01", title: "Biomedical Optics", text: "We use the interaction between light and biological tissue to develop imaging and sensing methods for life science and medicine.", href: "research#biomedical-optics", image: images.microscopy, alt: "Fluorescence microscopy view of a cellular network" },
-  { number: "02", title: "Optical Metrology", text: "We develop precise, non-contact optical methods to measure shape, motion, surfaces, and material properties.", href: "research#optical-metrology", image: images.lightSheet, alt: "Volumetric light sheets passing through translucent tissue" },
+  { number: "01", title: "Biomedical Optics", text: "From OCT and imaging catheters to multimodal microscopy, we reveal tissue structure and biochemical information for biomedical research.", href: "research/biomedical-optics", image: images.microscopy, alt: "Two-photon light-sheet microscopy image of neural structures in a brain section" },
+  { number: "02", title: "Optical Metrology", text: "We measure 3D surfaces, alignment, deformation, and material properties through precision optical imaging and spectroscopy.", href: "research/optical-metrology", image: images.lightSheet, alt: "Confocal measurements showing the shape and color of circuit-board and dental surfaces" },
 ];
 ---
 
 <Layout title="BOOM Lab | Biomedical Optics & Optical Metrology" description="BOOM Lab develops biomedical optics and optical metrology technologies.">
   <section class="hero">
-    <img class="hero-image" src={images.hero} alt="Optical beam illuminating fluorescent cellular structures" />
+    <img class="hero-image" src={images.hero} alt="A sample being prepared beneath a microscope" />
     <div class="hero-shade"></div>
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-content">
-      <p class="eyebrow"><span></span> Biomedical Optics &amp; Optical Metrology</p>
-      <h1>We illuminate<br />the <em>unseen.</em></h1>
-      <p class="intro">Exploring life through light—building new optical tools to see deeper, measure faster, and understand more.</p>
+      <p class="eyebrow"><span></span> Biomedical Optics &amp; Optical Metrology Lab</p>
+      <h1>Seeing the <em>unseen</em></h1>
       <div class="hero-actions">
-        <a class="primary-button" href={pageUrl("research")}>Explore our research <span aria-hidden="true">↗</span></a>
+        <a class="primary-button" href={pageUrl("research/biomedical-optics")}>Explore our research <span aria-hidden="true">↗</span></a>
         <a class="text-link" href="#about">Discover the lab <span aria-hidden="true">↓</span></a>
-      </div>
-    </div>
-    <div class="hero-index" aria-hidden="true"><span>01</span><i></i><span>03</span></div>
-  </section>
-
-  <section class="about" id="about">
-    <div class="section-label"><span>About us</span><i></i></div>
-    <div class="about-copy">
-      <p class="kicker">Beyond what the eye can see</p>
-      <h2>Light is more than a way to see.<br />It is a way to <em>discover.</em></h2>
-      <div class="about-detail">
-        <p>BOOM Lab sits at the intersection of optics, engineering, and biology. We create imaging technologies that turn complex biological processes into information researchers can see and use.</p>
-        <a href={pageUrl("people/professor")}>Meet our people <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -49,10 +35,8 @@ const researchAreas = [
   <section class="featured-video" aria-labelledby="featured-video-title">
     <div class="video-heading">
       <div>
-        <p class="kicker">Featured video</p>
         <h2 id="featured-video-title">BOOM Lab in motion</h2>
       </div>
-      <p>Discover our approach to optical measurement and biomedical imaging through this featured film.</p>
     </div>
     <div class="video-frame">
       <iframe
@@ -66,16 +50,27 @@ const researchAreas = [
     </div>
   </section>
 
+  <section class="about" id="about">
+    <div class="about-copy">
+      <h2>About Us</h2>
+      <div class="about-detail">
+        <p>The Biomedical Optics and Optical Metrology (BOOM) Lab develops optical imaging technologies to address medical problems and industrial challenges. We design new optical instruments and methods to reveal structures, processes, and material properties that are otherwise difficult to see.</p>
+        <p>Our Biomedical Optics team develops endoscopic imaging catheters, multimodal imaging systems, and advanced 3D microscopes, translating these technologies into preclinical and clinical research. By connecting tissue structure with biochemical information, we aim to support a deeper understanding of disease and more informed diagnosis and treatment. We also integrate AI to enhance optical images and support quantitative interpretation.</p>
+        <p>Our Optical Metrology team develops confocal microscopy, interferometry, spectroscopy, and optical measurement methods for 3D surface imaging, precise alignment, deformation measurement, and material characterization. Across both areas, our goal is to advance medical diagnostics and precision industry applications by seeing the previously unseen.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="research-preview">
     <div class="research-heading">
       <div><p class="kicker">What we explore</p><h2>Research areas</h2></div>
-      <a href={pageUrl("research")}>View all research <span aria-hidden="true">↗</span></a>
+      <a href={pageUrl("research/biomedical-optics")}>View all research <span aria-hidden="true">↗</span></a>
     </div>
     <div class="research-grid">
       {researchAreas.map((area) => (
         <article class="research-card">
           <a href={pageUrl(area.href)} aria-label={`Learn about ${area.title}`}>
-            <div class="card-image"><img src={area.image} alt={area.alt} loading="lazy" /><span>{area.number}</span></div>
+            <div class:list={["card-image", { metrology: area.number === "02" }]}><img src={area.image} alt={area.alt} loading="lazy" /></div>
             <div class="card-body"><h3>{area.title}</h3><p>{area.text}</p><i aria-hidden="true">↗</i></div>
           </a>
         </article>
@@ -83,103 +78,75 @@ const researchAreas = [
     </div>
   </section>
 
-  <section class="news-preview">
-    <div><p class="kicker">From the lab</p><h2>Latest news</h2></div>
-    <div class="news-list">
-      <a href={pageUrl("news")}><time datetime="2026-09-01">Sep 01, 2026</time><strong>Add your latest lab news or publication highlight here.</strong><span aria-hidden="true">↗</span></a>
-      <a href={pageUrl("news")}><time datetime="2026-08-14">Aug 14, 2026</time><strong>This area is ready for awards, events, and team updates.</strong><span aria-hidden="true">↗</span></a>
-    </div>
-  </section>
 </Layout>
 
 <style>
-  .hero { position: relative; min-height: 720px; height: calc(100svh - 20px); overflow: hidden; display: flex; align-items: center; }
+  .hero { position: relative; min-height: 520px; height: clamp(520px, 42vw, 680px); overflow: hidden; display: flex; align-items: center; }
   .hero-image, .hero-shade, .hero-grid { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .hero-image { object-fit: cover; object-position: center; }
+  .hero-image { object-fit: cover; object-position: center; transform: translateX(12%); mask-image: linear-gradient(90deg, transparent, black 12%); }
   .hero-shade { background: linear-gradient(90deg, rgba(4, 16, 28, 0.98) 0%, rgba(4, 16, 28, 0.82) 40%, rgba(4, 16, 28, 0.1) 78%); }
   .hero-grid { opacity: 0.12; background-image: linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(90deg, black, transparent 70%); }
   .hero-content { position: relative; z-index: 2; width: var(--content); margin: 0 auto; padding: 80px 0 100px; }
   .eyebrow, .kicker { margin: 0; color: var(--acid); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
-  .eyebrow { display: flex; align-items: center; gap: 12px; }
-  .eyebrow span { width: 28px; height: 1px; background: var(--acid); }
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-size: clamp(.95rem, 1.5vw, 1.3rem); line-height: 1.5; letter-spacing: .08em; }
+  .eyebrow span { width: 28px; flex-shrink: 0; height: 1px; background: var(--acid); }
   h1 { max-width: 860px; margin: 30px 0 24px; font-size: clamp(4.2rem, 8.8vw, 8.1rem); line-height: 0.85; letter-spacing: -0.075em; }
   h1 em, h2 em { color: var(--cyan); font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
-  .intro { max-width: 560px; margin: 0; color: #c0cbd3; font-size: 1.1rem; line-height: 1.75; }
   .hero-actions { display: flex; align-items: center; gap: 34px; margin-top: 42px; }
   .primary-button { min-width: 206px; padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; border-radius: 2px; background: var(--acid); color: var(--ink); font-size: 0.82rem; font-weight: 700; transition: background 180ms ease, transform 180ms ease; }
   .primary-button:hover { background: var(--white); transform: translateY(-2px); }
   .text-link { padding-bottom: 5px; border-bottom: 1px solid var(--line); color: #e0e7eb; font-size: 0.82rem; }
   .text-link span { margin-left: 8px; color: var(--acid); }
-  .hero-index { position: absolute; z-index: 2; right: max(32px, calc((100vw - 1280px) / 2)); bottom: 58px; display: flex; align-items: center; gap: 11px; font-size: 0.68rem; }
-  .hero-index i { width: 72px; height: 1px; background: linear-gradient(90deg, var(--acid) 33%, rgba(255,255,255,.28) 33%); }
-  .about { width: var(--content); margin: 0 auto; padding: 140px 0; display: grid; grid-template-columns: 1fr 4fr; gap: 64px; }
-  .section-label { display: flex; align-items: flex-start; gap: 14px; padding-top: 35px; color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; }
-  .section-label i { flex: 1; height: 1px; margin-top: 8px; background: var(--line); }
-  .about h2 { max-width: 950px; margin: 24px 0 50px; font-size: clamp(2.7rem, 5.3vw, 5.6rem); line-height: 1.02; letter-spacing: -0.055em; }
-  .about-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: end; }
-  .about-detail p { max-width: 590px; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.8; }
+  .about { width: var(--content); margin: 0 auto; padding: 100px 0 120px; display: block; }
+  .about h2 { max-width: 950px; margin: 0 0 32px; font-size: clamp(2.7rem, 5.3vw, 5.6rem); line-height: 1.02; letter-spacing: -0.055em; }
+  .about-detail { display: grid; gap: 24px; }
+  .about-detail p { max-width: 900px; margin: 0; color: var(--muted); font-size: 1.18rem; line-height: 1.85; }
   .about-detail a, .research-heading > a { justify-self: end; padding-bottom: 6px; border-bottom: 1px solid var(--acid); font-size: 0.82rem; }
   .about-detail a span, .research-heading > a span { margin-left: 20px; color: var(--acid); }
-  .featured-video { width: var(--content); margin: 0 auto; padding: 0 0 140px; }
-  .video-heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: 70px; align-items: end; margin-bottom: 46px; }
-  .video-heading h2 { margin: 15px 0 0; font-size: clamp(2.7rem, 4.8vw, 4.8rem); line-height: 1; letter-spacing: -0.055em; }
-  .video-heading > p { max-width: 520px; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.75; }
+  .featured-video { width: var(--content); margin: 0 auto; padding: 100px 0 0; }
+  .video-heading { margin-bottom: 46px; }
+  .video-heading h2 { margin: 15px 0 0; font-size: clamp(1.6rem, 6vw, 4.8rem); white-space: nowrap; line-height: 1; letter-spacing: -0.055em; }
   .video-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.24); }
   .video-frame::before { content: ""; position: absolute; z-index: 1; inset: 0; pointer-events: none; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04); }
   .video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
   .research-preview { padding: 120px max(32px, calc((100vw - 1280px) / 2)); background: var(--paper); color: var(--ink); }
   .research-heading { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 58px; }
-  .research-heading .kicker, .news-preview .kicker { color: #557074; }
-  .research-heading h2, .news-preview h2 { margin: 14px 0 0; font-size: clamp(2.6rem, 4.5vw, 4.5rem); line-height: 1; letter-spacing: -0.055em; }
+  .research-heading .kicker { color: #557074; }
+  .research-heading h2 { margin: 14px 0 0; font-size: clamp(2.6rem, 4.5vw, 4.5rem); line-height: 1; letter-spacing: -0.055em; }
   .research-heading > a { border-color: #506469; }
   .research-heading > a span { color: #47686e; }
   .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .research-card { background: var(--white); }
   .card-image { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--ink-soft); }
-  .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease; }
-  .card-image span { position: absolute; top: 18px; left: 18px; display: grid; place-items: center; width: 38px; height: 38px; background: var(--acid); color: var(--ink); font-size: 0.72rem; font-weight: 700; }
+  .card-image img { width: 100%; height: 100%; object-fit: contain; transition: transform 500ms ease; }
+  .card-image.metrology { background: white; padding: 16px; }
   .research-card:hover .card-image img { transform: scale(1.035); }
   .card-body { position: relative; padding: 28px 72px 32px 28px; min-height: 176px; }
   .card-body h3 { margin: 0 0 12px; font-size: 1.45rem; letter-spacing: -0.03em; }
   .card-body p { max-width: 510px; margin: 0; color: #59666a; font-size: 0.9rem; line-height: 1.65; }
   .card-body i { position: absolute; top: 30px; right: 28px; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #bdc6c4; border-radius: 50%; font-style: normal; }
-  .news-preview { width: var(--content); margin: 0 auto; padding: 120px 0 140px; display: grid; grid-template-columns: 1fr 2fr; gap: 70px; }
-  .news-preview .kicker { color: var(--acid); }
-  .news-list { border-top: 1px solid var(--line); }
-  .news-list a { display: grid; grid-template-columns: 130px 1fr auto; gap: 28px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); transition: color 180ms ease; }
-  .news-list a:hover { color: var(--acid); }
-  .news-list time { color: var(--muted); font-size: 0.78rem; }
-  .news-list strong { font-size: 1rem; font-weight: 500; }
-  .news-list span { color: var(--acid); }
   @media (max-width: 980px) {
-    .hero { min-height: 680px; height: auto; }
+    .hero { min-height: 520px; height: auto; }
     .about { grid-template-columns: 1fr; padding: 100px 0; }
-    .section-label { max-width: 260px; padding-top: 0; }
     .video-heading { grid-template-columns: 1fr; gap: 24px; }
     .research-preview { padding-inline: 20px; }
-    .news-preview { grid-template-columns: 1fr; }
   }
   @media (max-width: 700px) {
-    .hero { min-height: 660px; }
+    .hero { min-height: 540px; }
     .hero-image { object-position: 62% center; }
     .hero-shade { background: linear-gradient(90deg, rgba(4,16,28,.98), rgba(4,16,28,.64)); }
     .hero-content { padding: 70px 0 120px; }
     h1 { font-size: clamp(3.65rem, 18vw, 5.8rem); }
-    .intro { font-size: 1rem; }
     .hero-actions { align-items: flex-start; flex-direction: column; gap: 22px; }
-    .hero-index { left: 14px; right: auto; bottom: 38px; }
     .about { padding: 80px 0; gap: 34px; }
     .about h2 { margin-bottom: 34px; }
     .about-detail { grid-template-columns: 1fr; gap: 32px; }
     .about-detail a { justify-self: start; }
-    .featured-video { padding-bottom: 80px; }
+    .featured-video { padding-top: 70px; }
     .video-heading { margin-bottom: 30px; }
     .research-preview { padding-block: 80px; }
     .research-heading { align-items: flex-start; flex-direction: column; }
     .research-heading > a { justify-self: start; }
     .research-grid { grid-template-columns: 1fr; }
-    .news-preview { padding: 80px 0 90px; gap: 42px; }
-    .news-list a { grid-template-columns: 1fr auto; gap: 10px; }
-    .news-list time { grid-column: 1 / -1; }
   }
 </style>

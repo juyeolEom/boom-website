@@ -1,0 +1,98 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageIntro from "./PageIntro.astro";
+import { researchAreas } from "../data/research";
+import imageDimensions from "../data/research-images.json";
+const dimensions: Record<string, { width: number; height: number }> = imageDimensions;
+interface Props { area: typeof researchAreas[number] }
+const { area } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Layout title={`${area.title} | BOOM Lab`} description={area.description}>
+  <nav class="area-nav" aria-label="Research areas">
+    {researchAreas.map((item) => <a href={`${base}/research/${item.slug}`} aria-current={item.slug === area.slug ? "page" : undefined}>{item.title}</a>)}
+  </nav>
+  <PageIntro eyebrow="Research" title={area.title} />
+  <div class="research-body">
+    <aside>
+      <nav class="topic-nav" aria-label="Research topics">
+        <p>Explore our research</p>
+        {area.topics.map((topic, index) => <a href={`#${topic.id}`}><span>{String(index + 1).padStart(2, "0")}</span>{topic.shortTitle}</a>)}
+      </nav>
+    </aside>
+    <div class="topics">
+      {area.topics.map((topic, index) => (
+        <section class="topic" id={topic.id} aria-labelledby={`${topic.id}-title`}>
+          <span class="topic-number">{String(index + 1).padStart(2, "0")}</span>
+          <h2 id={`${topic.id}-title`}>{topic.title}</h2>
+          <p class="lead">{topic.lead}</p>
+          <div class="copy">{topic.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+          <div class:list={["figures", { pair: topic.images.length > 1 }]}>
+            {topic.images.map((img) => (
+              <figure>
+                <div class="image-frame"><img src={`${base}/images/research/${img.file}`} alt={img.alt} width={dimensions[img.file].width} height={dimensions[img.file].height} loading="lazy" decoding="async" /></div>
+                <figcaption>{img.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+  <div class="other-area">
+    <span>Explore more</span>
+    {researchAreas.filter((item) => item.slug !== area.slug).map((item) => <a href={`${base}/research/${item.slug}`}>{item.title}<span aria-hidden="true">↗</span></a>)}
+  </div>
+</Layout>
+
+<style>
+  .area-nav { width: var(--content); margin: auto; display: flex; justify-content: flex-start; gap: 32px; padding: 24px 0 0; }
+  .area-nav a::after, .topic-nav a::after { display: none; }
+  .area-nav a { color: var(--muted); padding-bottom: 15px; border-bottom: 2px solid transparent; font-size: .9rem; }
+  .area-nav a[aria-current] { color: var(--acid); border-color: var(--acid); }
+  .area-nav a:hover { color: var(--white); }
+  .research-body { width: var(--content); margin: 0 auto; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: clamp(40px, 6vw, 90px); padding: 72px 0 100px; }
+  aside, .topics { min-width: 0; }
+  .topic-nav { display: block; position: sticky; top: 32px; }
+  .topic-nav > p { margin: 0 0 22px; text-transform: uppercase; letter-spacing: .12em; font-size: .67rem; color: var(--muted); }
+  .topic-nav a { display: flex; white-space: normal; align-items: baseline; gap: 13px; padding: 14px 0; border-bottom: 1px solid var(--line); color: #d0dbe3; font-size: .85rem; }
+  .topic-nav a:hover { color: var(--acid); }
+  .topic-nav a span { font-size: .7rem; color: var(--acid); }
+  .topics { container-type: inline-size; }
+  .topic { scroll-margin-top: 32px; }
+  .topic + .topic { margin-top: 88px; padding-top: 72px; border-top: 1px solid var(--line); }
+  .topic-number { color: var(--acid); font-size: .76rem; }
+  h2 { margin: 16px 0 22px; font-size: min(2.7rem, 4.5cqw); letter-spacing: -.045em; line-height: 1.1; white-space: nowrap; }
+  .lead { font-size: 1.15rem; line-height: 1.6; color: var(--cyan); margin: 0 0 24px; }
+  .copy { max-width: 760px; }
+  .copy p { color: var(--muted); font-size: 1rem; line-height: 1.85; margin: 0 0 16px; }
+  .figures { display: grid; gap: 24px; margin-top: 32px; }
+  .figures.pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  figure { margin: 0; min-width: 0; }
+  .image-frame { background: white; padding: 16px; display: grid; align-items: center; min-height: 240px; }
+  .image-frame img { width: 100%; height: auto; max-height: 480px; object-fit: contain; }
+  .pair .image-frame { height: 310px; }
+  .pair img { max-height: 278px; }
+  figcaption { margin-top: 13px; color: var(--muted); font-size: .92rem; line-height: 1.6; }
+  .other-area { width: var(--content); margin: 0 auto; padding: 36px 0 64px; border-top: 1px solid var(--line); }
+  .other-area > span { color: var(--muted); font-size: .75rem; }
+  .other-area a { display: flex; justify-content: space-between; align-items: center; gap: 24px; font-size: clamp(1.6rem, 4vw, 3rem); margin-top: 12px; }
+  .other-area a:hover { color: var(--acid); }
+  @media (max-width: 1000px) {
+    .research-body { grid-template-columns: 1fr; gap: 48px; padding-top: 32px; }
+    .topic-nav { position: static; }
+    .topic-nav > p { margin-bottom: 8px; }
+    .topic-nav a { display: inline-flex; margin-right: 24px; }
+  }
+  @media (max-width: 600px) {
+    .area-nav { gap: 22px; }
+    .area-nav a { font-size: .8rem; }
+    .figures.pair { grid-template-columns: 1fr; }
+    .pair .image-frame { height: auto; min-height: 180px; }
+    .image-frame { min-height: 140px; padding: 10px; }
+    .topic + .topic { margin-top: 56px; padding-top: 48px; }
+    .topic-nav a { width: 100%; margin-right: 0; }
+    .research-body { padding-bottom: 64px; }
+  }
+</style>

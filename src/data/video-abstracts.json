@@ -1,0 +1,112 @@
+[
+  {
+    "videoId": "29ZnC8_B0yI",
+    "publicationNumber": 111,
+    "title": "AI-Powered OCT-FFR, Circulation Journal 2026",
+    "year": 2026,
+    "doi": "10.1253/circj.CJ-26-0020",
+    "abstract": [
+      {
+        "label": "Background",
+        "text": "Intracoronary imaging-derived physiologic indices enable vessel-level assessment of coronary flow impairment by integrating obstructive plaque burden. However, accurately evaluating hyperemic flow remains challenging due to the difficulty of simultaneously incorporating both vascular geometry and plaque composition."
+      },
+      {
+        "label": "Methods And Results",
+        "text": "We aimed to develop and validate a deep learning algorithm using optical coherence tomography (OCT) to predict continuous, lesion-specific changes in fractional flow reserve (∆FFR) along coronary segments. Model performance was evaluated using Pearson’s correlation, a confusion matrix, and a receiver operating characteristic (ROC) curve, with invasive wire-based FFR as the reference. The model was trained and tested on 157 OCT pullbacks from 86 patients, demonstrating enhanced predictive performance by incorporating anatomical and compositional OCT features compared to conventional feature-based machine learning approaches. Predicted ∆FFROCT values correlated strongly with wire-based ∆FFR (R=0.932, P<0.001), achieving an accuracy of 0.952 for detecting physiologically significant lesions and an area under the curve of 0.953 in the ROC analysis. The model accurately localized segmental pressure gradients, effectively distinguishing focal from diffuse disease patterns."
+      },
+      {
+        "label": "Conclusions",
+        "text": "This novel deep learning-based algorithm enabled lesion-specific, pressure wire-free physiologic assessment from a single OCT pullback. By integrating anatomical and compositional data, it supported improved diagnostic accuracy and personalized treatment for coronary artery disease."
+      }
+    ]
+  },
+  {
+    "videoId": "A6aBuHIDgaY",
+    "publicationNumber": 108,
+    "title": "TP-ob-LSM, Photonics Research 2026",
+    "year": 2026,
+    "doi": "10.1364/PRJ.584858",
+    "abstract": [
+      {
+        "label": "",
+        "text": "Two-photon light sheet microscopy is a powerful technology for rapid three-dimensional (3D) fluorescence imaging with low phototoxicity, which has led to its wide adoption in biomedical and life science applications. However, conventional multiobjective lens configurations limit compatibility with large or irregularly shaped biological samples, restricting broader applicability. Moreover, image quality is often compromised due to the inherent trade-off between the low numerical aperture required for selective planar illumination and the reduced efficiency of two-photon excitation. In this study, we present a single-objective two-photon oblique light sheet microscopy (TP-ob-LSM) system employing a low-repetition-rate light source. This single-objective lens design enables simultaneous excitation and detection, thereby significantly enhancing compatibility with diverse biological sample geometries. Furthermore, by adjusting the repetition rate while maintaining constant average power, we increased pulse energy and achieved a 22.9-fold improvement in signal-to-noise ratio compared to conventional high-repetition-rate systems through system-level optimization of the excitation regime. We demonstrate large-volume reconstructions (9 mm × 6 mm × 0.18 mm) and deep-tissue imaging in 1-mm-thick mouse brain slices with clear dendritic morphology. The proposed TP-ob-LSM with low-repetition-rate excitation offers a promising solution for high-quality 3D imaging across a wide range of biomedical applications."
+      }
+    ]
+  },
+  {
+    "videoId": "bDWZeNXTzgo",
+    "publicationNumber": 104,
+    "title": "Lipid Detection with Spectroscopic OCT, Biomedical Optics Express 2026",
+    "year": 2026,
+    "doi": "10.1364/BOE.585222",
+    "abstract": [
+      {
+        "label": "",
+        "text": "Reliable identification of lipid distribution is critical for assessing coronary vulnerability, yet conventional optical coherence tomography (OCT) lacks compositional specificity. Expanding OCT into the spectral information through spectroscopic OCT (S-OCT), in combination with deep learning, enables automated, composition-aware tissue characterization without requiring hardware modification. This study aims to develop a weakly supervised deep learning framework for lipid detection and localization from S-OCT data, minimizing the need for dense manual annotation. A ResNet-34 network incorporating convolutional block attention modules (CBAMs) was trained using frame-level binary labels of lipid presence. Gradient-weighted class activation mapping (Grad-CAM) was applied to generate interpretable activation maps highlighting lipid-associated regions. Model predictions were validated against Oil Red O-stained histology of rabbit aortas. The proposed model accurately localized lipid regions with strong spatial correspondence to histology, achieving an arc-level overlap agreement of 83.9%. Comparative analyses confirmed that incorporating spectroscopic information significantly improved lipid detection over conventional OCT. This framework demonstrates the feasibility of spectroscopically enhanced, weakly supervised deep learning for automated lipid detection in intravascular imaging. By enabling efficient lipid screening and spatial interpretation, it establishes a scalable foundation for downstream assessment of lipid burden and clinically relevant plaque characterization, with potential utility for automated risk stratification."
+      }
+    ]
+  },
+  {
+    "videoId": "B3ODpTT_dXY",
+    "publicationNumber": 102,
+    "title": "Chromatic OCT, Photonics Research 2025",
+    "year": 2025,
+    "doi": "10.1364/PRJ.561513",
+    "abstract": [
+      {
+        "label": "",
+        "text": "Achieving clear and deep tissue imaging with optical coherence tomography (OCT) necessitates the simultaneous optimization of three critical factors: high resolution, extended depth of focus (DOF), and high signal-to-noise ratio (SNR). Conventional OCT systems often compromise one or more of these factors, due to inherent trade-offs in optical design and noise management. To address these limitations, we present a chromatic OCT system that simultaneously optimizes all three parameters. The system achieves an isotropic spatial resolution of 2 to 3 μm by leveraging a broad bandwidth light source and high-numerical-aperture optics with a pronounced chromatic focal shift, which enables up to a sevenfold DOF extension. Additionally, a novel noise-gating algorithm suppresses system-inherent noise, sidelobe artifacts, and multiple scattering effects, significantly enhancing the SNR. Comparative simulations and experiments demonstrate that the proposed chromatic OCT outperforms conventional high-resolution systems by maintaining superior resolution and SNR over an extended imaging range. These advancements establish chromatic OCT as a powerful tool for high-resolution, deep tissue imaging in biomedical applications, offering improved diagnostic capabilities."
+      }
+    ]
+  },
+  {
+    "videoId": "gOMzIz3d98A",
+    "publicationNumber": 97,
+    "title": "TeD: Fluorescence Denoising, PhotoniX 2025",
+    "year": 2025,
+    "doi": "10.1186/s43074-025-00173-8",
+    "abstract": [
+      {
+        "label": "",
+        "text": "Fluorescence microscopy has become one of the most widely employed in vivo imaging modalities, enabling the discovery of new biopathological mechanisms. However, the application of fluorescence imaging is often hindered by signal-to-noise ratio issues owing to inherent noise arising from various systemic and biophysical characteristics. These limitations pose a growing challenge, especially with the desire to elucidate dynamic biomechanisms at previously unreachable rapid speeds. Here, we propose a temporal gradient (TG)-based self-supervised denoising network (TeD) that could enable an unprecedented advance in spatially dynamic fluorescence imaging. Our strategy is predicated on the insight that judicious utilization of spatiotemporal information is more advantageous for denoising predictions. Adopting the TG, which intrinsically embodies spatial dynamic features, enables TeD to prudently focus on spatiotemporal information. We showed that TeD can provide new interpretative opportunities for understanding dynamic fluorescence signals in in vivo imaging of mice, representing cellular flow. Furthermore, we demonstrated that TeD is robust even when fluorescence signals exhibit temporal kinetics without spatial dynamics, as seen in neuronal population imaging. We believe that TeD’s superior performance even with spatially dynamic samples, including the complex behavior of cells or organisms, could make a substantial contribution to various biological studies."
+      }
+    ]
+  },
+  {
+    "videoId": "tFnjYxKEODA",
+    "publicationNumber": 96,
+    "title": "First-in-Human OCT-FLIm, JAMA Cardiology 2025",
+    "year": 2025,
+    "doi": "10.1001/jamacardio.2025.0928",
+    "abstract": [
+      {
+        "label": "Importance",
+        "text": "Fluorescence lifetime imaging (FLIm) is a molecular imaging technique used to visualize the biochemical composition of atherosclerosis. Novel dual-modal imaging using optical coherence tomography (OCT)-FLIm has the potential to provide both microstructural and biocompositional information on coronary plaques; however, it needs validation for clinical application."
+      },
+      {
+        "label": "Objective",
+        "text": "To investigate the clinical feasibility and safety of OCT-FLIm for characterizing plaque compositions in patients with coronary artery disease (CAD) undergoing revascularization therapy."
+      },
+      {
+        "label": "Design, Setting, And Participants",
+        "text": "A prospective, open-label, single-center diagnostic feasibility study involving 40 patients with significant CAD requiring coronary revascularization. This first-in-human clinical study of the novel intracoronary OCT-FLIm imaging was conducted between February and August 2022. The analyses were performed from August 2022 to July 2023."
+      },
+      {
+        "label": "Interventions",
+        "text": "An OCT-FLIm system with 2.6-F catheters was constructed. All patients underwent OCT-FLIm for target/culprit and nontarget/nonculprit lesions during coronary revascularization. Intravascular ultrasound imaging was performed for comparison."
+      },
+      {
+        "label": "Main Outcomes And Measures",
+        "text": "The primary outcome was to assess the FLIm-derived molecular readouts of prespecified plaque compositions. The secondary outcome was the feasibility of OCT-FLIm in determining target/culprit plaque compositions across different subsets of atherosclerotic disease activity: (1) acute coronary syndrome (ACS) vs chronic stable angina (CSA) and (2) angiographic rapid disease progression vs nonprogressive controls."
+      },
+      {
+        "label": "Results",
+        "text": "We prospectively enrolled 40 patients (mean [SD] age, 63.1 [8.1] years; 32 men [80.0%]), of whom 20 presented with ACS and 20 with CSA. OCT provided the structural features of plaques, and FLIm characterized the molecular signatures of atheroma compositions, including macrophages, healed plaques, superficial calcification, and fibrosis, in a reproducible manner. Fluorescence lifetime (FL) values of the plaque compositions correlated with findings from prior autopsy studies. Plaque inflammation was significantly greater in patients with ACS than those with CSA. The mean (SD) of inflammation-FL was 7.59 (0.96) nanoseconds for patients with ACS vs 6.46 (0.87) nanoseconds for patients with CSA (P < .001). The healed plaque phenotype was more prominently distributed in the segments of rapid disease progression than in nonprogressive controls. The mean (SD) healed plaque-FL was 5.31 (0.20) nanoseconds for the rapidly progressive lesions vs 4.81 (0.30) nanoseconds for the rapidly nonprogressive lesions (P < .001). All patients underwent OCT-FLIm safely without adverse clinical events."
+      },
+      {
+        "label": "Conclusions And Relevance",
+        "text": "This diagnostic feasibility study found that an OCT-FLIm structural-molecular intracoronary imaging is clinically feasible and safe for the comprehensive characterization of human atheromas, supporting its potential role in the diagnosis and biological understanding of high-risk plaques."
+      }
+    ]
+  }
+]

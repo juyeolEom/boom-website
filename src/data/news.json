@@ -1,0 +1,133 @@
+[
+  {
+    "slug": "inventors-day-award",
+    "date": "2026-05-21",
+    "title": "유홍기 교수님, ‘제61회 발명의 날’ 국무총리표창 수상 (Prof. Hongki Yoo Receives the Prime Minister's Commendation at the 61st Invention Day)",
+    "paragraphs": [
+      "유홍기 교수님께서 광학진단 및 측정 분야의 혁신적인 기술 개발과 산학협력에 기여한 공로를 인정받아 '제61회 발명의 날 기념식'에서 국무총리표창을 수상하셨습니다. 첨단 의료 및 산업 분야에서 이처럼 뜻깊은 결실을 맺기 위해 끊임없이 헌신해 주신 교수님과 모든 연구원분들의 노고에 깊은 감사와 축하를 전합니다.",
+      "We are pleased to announce that Professor Hongki Yoo has been honored with the Prime Minister's Commendation at the 61st Invention Day ceremony in recognition of his pioneering contributions to optical diagnostics and measurement technologies. We extend our deepest gratitude and congratulations to Professor Yoo and all the researchers who dedicated themselves to achieving this remarkable milestone in advancing medical and industrial applications."
+    ],
+    "images": [
+      {
+        "src": "images/news/inventors-day-award/1.webp",
+        "width": 1200,
+        "height": 800,
+        "alt": "제61회 발명의 날 기념식 국무총리표창 수상자 단체 사진"
+      }
+    ],
+    "links": [
+      {
+        "label": "KAIST 기계공학과",
+        "url": "https://me.kaist.ac.kr/news/news_020100.html?bmain=view&uid=1173",
+        "type": "관련 기사"
+      }
+    ],
+    "thumbnail": "images/news/inventors-day-award/thumbnail.webp"
+  },
+  {
+    "slug": "kaist-top-10-research",
+    "date": "2026-03-20",
+    "title": "2025 카이스트 대표 연구 성과 10선 선정 (Selected for the 2025 KAIST Top 10 Research Achievements)",
+    "paragraphs": [
+      "세계 최초로 인체 대상 임상 검증을 완료한 '이중 모달리티 OCT-FLIm 시스템' 연구가 그 우수성을 인정받아 '카이스트 대표 연구 성과 10선'에 선정되었습니다. 심혈관 질환 진단 분야에서 이처럼 훌륭한 결실을 맺기 위해 헌신해 주신 모든 연구원분들의 노고에 깊은 감사와 축하를 전합니다.",
+      "We are thrilled to announce that our lab's research on the \"Dual-modal OCT-FLIm system,\" which was successfully validated in the world's first-in-human clinical trial for coronary artery disease, has been proudly selected as one of the 'KAIST Top 10 Research Achievements.' We extend our deepest gratitude and congratulations to all the researchers who dedicated themselves to achieving this remarkable milestone in the field of cardiovascular diagnostics."
+    ],
+    "images": [
+      {
+        "src": "images/news/kaist-top-10-research/1.webp",
+        "width": 749,
+        "height": 639,
+        "alt": "KAIST 대표 연구성과 시상식에서 상을 받는 유홍기 교수"
+      }
+    ],
+    "links": [
+      {
+        "label": "JAMA Cardiology",
+        "url": "https://jamanetwork.com/journals/jamacardiology/fullarticle/2833590",
+        "type": "논문"
+      },
+      {
+        "label": "KAIST 기계공학과",
+        "url": "https://me.kaist.ac.kr/news/news_020100.html?bmain=view&uid=1116",
+        "type": "관련 기사"
+      }
+    ],
+    "thumbnail": "images/news/kaist-top-10-research/thumbnail.webp"
+  },
+  {
+    "slug": "boe-editors-pick",
+    "date": "2026-02-20",
+    "title": "Biomedical Optics Express Editor’s Pick 선정",
+    "paragraphs": [
+      "분광 정보와 약지도 학습을 결합하여 혈관 내 지질을 정밀하게 자동 검출하는 프레임워크를 제시한 \"Automated lipid detection in spectroscopic optical coherence tomography using a weakly supervised deep learning network\" 연구가 기술적 가치를 인정받아 'Biomedical Optics Express'의 Editor's Pick으로 선정되었습니다."
+    ],
+    "images": [
+      {
+        "src": "images/news/boe-editors-pick/1.webp",
+        "width": 1319,
+        "height": 660,
+        "alt": "전문가 주석과 인공지능의 혈관 내 지질 검출 결과 비교"
+      }
+    ],
+    "links": [
+      {
+        "label": "Biomedical Optics Express",
+        "url": "https://opg.optica.org/boe/fulltext.cfm?uri=boe-17-3-1279",
+        "type": "논문"
+      },
+      {
+        "label": "Optica",
+        "url": "https://www.optica.org/about/newsroom/news_releases/2026/combining_ai_with_oct_shows_potential_for_detecting_lipid-rich_plaques_in_coronary_arteries/?_gl=1*10grzuk*_gcl_au*MTY1MjcxNjEzMi4xNzcxNDY2ODg3*_ga*Nzk0ODExNTUxLjE3NTg4MTA0ODI.*_ga_EGFN5DM8HB*czE3NzE1NjE4MTkkbzM1JGcwJHQxNzcxNTYxODE5JGo2MCRsMCRoMA",
+        "type": "관련 기사"
+      }
+    ],
+    "thumbnail": "images/news/boe-editors-pick/thumbnail.webp"
+  },
+  {
+    "slug": "first-in-human-oct-flim",
+    "date": "2025-05-08",
+    "title": "세계 최초 심혈관 내 생화학 정보 실시간 영상 임상 성공",
+    "paragraphs": [
+      "유홍기 교수팀이 고려대학교 구로병원 심혈관센터 김진원 교수팀과 협력해, 관상동맥 질환의 진단 정밀도를 혁신적으로 높일 수 있는 영상기술을 개발하고, 이를 세계 최초로 사람을 대상으로 한 임상시험에 성공했다.",
+      "이번 연구에서는 광간섭단층촬영(OCT)과 형광수명영상(FLIm)을 결합한 차세대 다중 모달 영상 기술을 실제 환자에게 적용해, 심장 혈관 속 동맥경화반의 구조뿐만 아니라 그 내부의 생화학적 조성까지 실시간으로 정밀하게 파악할 수 있음을 입증했다.",
+      "기존 영상기술로는 경화반 내부의 복잡한 병변을 정확히 구분하거나 정량화하기 어려웠지만, OCT-FLIm 기술을 통해 염증, 치유반(손상 회복 흔적), 칼슘 침착 등 다양한 병리 정보를 정밀하게 구분할 수 있다. 특히, FLIm의 형광 수명 정보를 활용함으로써, 이러한 생화학적 특성이 환자의 임상 상태와 밀접하게 연관되어 있음을 확인했다.",
+      "연구진은 급성 심근경색과 같은 급성 관상동맥 증후군 환자에서는 염증 지표가 높게 나타났으며, 급속히 진행되는 병변에서는 반복된 경화반 파열과 치유로 인해 치유반이 높은 빈도로 뚜렷하게 분포하는 특징을 발견했다. 이는 심혈관 질환의 진행 정도나 개별 경화반의 상태를 보다 정밀하게 파악할 수 있는 단서를 제공한다.",
+      "이번 임상에서는 OCT와 FLIm을 완전히 통합한 융합 영상 카테터(Catheter)가 사용되었다. 연구진은 국내 환자 40명을 대상으로 실제 혈관 재개통 시술 중 해당 카테터를 삽입하여 병변을 분석했고, 모든 환자에서 시술이 안전하게 완료되었다. 이는 세계 최초로 융합 영상 카테터를 임상에 성공적으로 적용한 사례다.",
+      "동맥경화반의 병태생리는 매우 복잡하며, 단순한 해부학적 정보만으로는 향후 심혈관 질환 발생 여부나 치료 예후를 예측하기 어렵다는 사실이 여러 연구를 통해 밝혀지고 있다. 이번 연구는 실제 환자의 혈관에서 병리학적 위험 요소를 실시간으로 시각화하고 정량화한 세계 최초로 임상 사례로, 심혈관 질환의 정밀 진단과 개인 맞춤형 치료 전략 개발에 있어 중요한 전환점이 될 것으로 기대된다.",
+      "유홍기 교수가 공동 교신저자, 남형수 연구교수가 공동 제1 저자로 참여한 이번 연구 결과는 심장학 분야 최고 권위 학술지인 미국의학회 심장학 저널, 자마 카디오로지(JAMA Cardiology, Journal of the American Medical Association)에 2025년 5월 7일 자로 게재되었다."
+    ],
+    "images": [
+      {
+        "src": "images/news/first-in-human-oct-flim/1.webp",
+        "width": 962,
+        "height": 721,
+        "alt": "OCT-FLIm 임상시험이 진행되는 시술실"
+      },
+      {
+        "src": "images/news/first-in-human-oct-flim/2.webp",
+        "width": 1870,
+        "height": 1091,
+        "alt": "OCT-FLIm 카테터와 동맥경화반 영상 구성도"
+      },
+      {
+        "src": "images/news/first-in-human-oct-flim/3.webp",
+        "width": 2080,
+        "height": 1012,
+        "alt": "동맥경화반의 염증과 치유반 등을 보여주는 OCT-FLIm 영상"
+      }
+    ],
+    "links": [
+      {
+        "label": "동아사이언스",
+        "url": "https://www.dongascience.com/ko/news/71540",
+        "type": "관련 기사"
+      },
+      {
+        "label": "KAIST 기계공학과",
+        "url": "https://me.kaist.ac.kr/news/news_020100.html?bmain=view&uid=973",
+        "type": "관련 기사"
+      }
+    ],
+    "thumbnail": "images/news/first-in-human-oct-flim/thumbnail.webp"
+  }
+]

@@ -21,14 +21,17 @@ const navItems = [
     label: "Research",
     paths: ["/research"],
     children: [
-      { label: "Biomedical Optics", href: "research#biomedical-optics" },
-      { label: "Optical Metrology", href: "research#optical-metrology" },
+      { label: "Biomedical Optics", href: "research/biomedical-optics" },
+      { label: "Optical Metrology", href: "research/optical-metrology" },
     ],
   },
   {
     label: "Publication",
-    href: "publication",
     paths: ["/publication"],
+    children: [
+      { label: "Publications", href: "publication" },
+      { label: "Video Abstracts", href: "publication/videos" },
+    ],
   },
   { label: "Lecture", href: "lecture", paths: ["/lecture"] },
   { label: "Gallery", href: "gallery", paths: ["/gallery"] },
@@ -74,9 +77,6 @@ const navItems = [
         }
       </nav>
 
-      <a class="contact-link" href="mailto:h.yoo@kaist.ac.kr">
-        Contact
-      </a>
     </header>
 
     <main><slot /></main>
@@ -99,14 +99,21 @@ const navItems = [
 
 <script>
   const groups = document.querySelectorAll<HTMLElement>(".nav-group");
+  const closeMenus = new Map<HTMLElement, () => void>();
   groups.forEach((group) => {
     const toggle = group.querySelector<HTMLAnchorElement>(".nav-label")!;
-    const setOpen = (open: boolean) => toggle.setAttribute("aria-expanded", String(open));
+    let closeTimer: ReturnType<typeof setTimeout> | undefined;
+    const setOpen = (open: boolean) => {
+      clearTimeout(closeTimer);
+      if (open) closeMenus.forEach((close, other) => { if (other !== group) close(); });
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+    closeMenus.set(group, () => setOpen(false));
     group.addEventListener("pointerenter", (event) => {
       if (event.pointerType === "mouse") setOpen(true);
     });
     group.addEventListener("pointerleave", (event) => {
-      if (event.pointerType === "mouse") setOpen(false);
+      if (event.pointerType === "mouse") closeTimer = setTimeout(() => setOpen(false), 220);
     });
     group.addEventListener("focusout", (event) => {
       if (!group.contains(event.relatedTarget as Node)) setOpen(false);
@@ -163,7 +170,7 @@ const navItems = [
     height: 104px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 270px 1fr auto;
+    grid-template-columns: 270px 1fr;
     align-items: center;
     gap: 28px;
     border-bottom: 1px solid var(--line);
@@ -176,13 +183,12 @@ const navItems = [
   nav > a::after, .nav-label::after { content: ""; position: absolute; left: 0; bottom: -10px; width: 100%; height: 2px; background: var(--acid); transform: scaleX(0); transform-origin: right; transition: transform 180ms ease; }
   nav > a:hover::after, nav > a[aria-current="page"]::after, .nav-label:hover::after, .nav-label.active::after, .nav-group:has(:focus-visible) .nav-label::after { transform: scaleX(1); transform-origin: left; }
   .nav-group { position: relative; display: flex; align-items: center; }
-  .nav-group::after { content: ""; position: absolute; top: 100%; left: -14px; width: calc(100% + 28px); height: 22px; }
-  .dropdown { position: absolute; top: calc(100% + 10px); left: 0; min-width: 240px; padding: 9px; background: #0a1a2a; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.28); opacity: 0; visibility: hidden; transition: opacity 160ms ease, visibility 160ms ease; }
-  .nav-group:has(.nav-label[aria-expanded="true"]) .dropdown { opacity: 1; visibility: visible; }
+  .nav-group:has(.nav-label[aria-expanded="true"]) { z-index: 2; }
+  .dropdown { position: absolute; top: calc(100% + 10px); left: 0; min-width: 240px; padding: 9px; background: #0a1a2a; border: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.28); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 160ms ease, visibility 160ms ease; }
+  .dropdown::before { content: ""; position: absolute; left: -1px; right: -1px; top: -12px; height: 12px; }
+  .nav-group:has(.nav-label[aria-expanded="true"]) .dropdown { opacity: 1; visibility: visible; pointer-events: auto; }
   .dropdown a { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 11px 12px; color: #d9e1e6; font-size: .94rem; }
   .dropdown a:hover { background: rgba(255,255,255,.06); color: var(--acid); }
-  .contact-link { min-width: 108px; display: flex; justify-content: center; align-items: center; padding: 11px 14px; border: 1px solid var(--line); border-radius: 99px; font-size: .94rem; transition: color 180ms ease, border-color 180ms ease; }
-  .contact-link:hover { color: var(--acid); border-color: var(--acid); }
   .site-footer { width: var(--content); margin: 0 auto; padding: 68px 0 44px; display: flex; justify-content: space-between; gap: 32px; border-top: 1px solid var(--line); }
   .footer-brand { display: block; width: max-content; }
   .footer-brand img { width: 250px; height: auto; filter: invert(1) hue-rotate(180deg); }
@@ -200,8 +206,8 @@ const navItems = [
     .site-header { min-height: 82px; gap: 14px; }
     .brand-logo { width: 170px; }
     .footer-brand img { width: 210px; }
-    .contact-link { min-width: auto; gap: 10px; }
     #nav-research { left: 0; right: auto; }
+    #nav-publication { left: auto; right: 0; }
     .dropdown { min-width: 210px; }
     .site-header nav { gap: 12px 28px; }
     .site-footer { flex-direction: column; padding-top: 48px; }

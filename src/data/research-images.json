@@ -1,0 +1,50 @@
+{
+  "ai-analysis.webp": {
+    "width": 1319,
+    "height": 660
+  },
+  "ai-imaging.webp": {
+    "width": 1790,
+    "height": 800
+  },
+  "brain-microscopy.webp": {
+    "width": 1484,
+    "height": 1034
+  },
+  "cardiovascular-imaging.webp": {
+    "width": 2080,
+    "height": 1012
+  },
+  "catheter-system.webp": {
+    "width": 1055,
+    "height": 692
+  },
+  "catheter-volume.webp": {
+    "width": 929,
+    "height": 985
+  },
+  "multimodal-microscopy.webp": {
+    "width": 1040,
+    "height": 699
+  },
+  "optical-alignment.webp": {
+    "width": 1360,
+    "height": 595
+  },
+  "optical-biopsy.webp": {
+    "width": 1626,
+    "height": 1009
+  },
+  "raman-analysis.webp": {
+    "width": 1318,
+    "height": 893
+  },
+  "surface-metrology.webp": {
+    "width": 1418,
+    "height": 1206
+  },
+  "optical-biopsy-2.webp": {
+    "width": 365,
+    "height": 377
+  }
+}

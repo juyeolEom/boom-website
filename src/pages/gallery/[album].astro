@@ -1,0 +1,126 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import albums from "../../data/gallery.json";
+import { albumDate } from "../../lib/gallery";
+export function getStaticPaths() {
+  return albums.map((album) => ({ params: { album: album.slug }, props: { album } }));
+}
+const { album } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<Layout title={`${album.titleKo} | ${album.title} | BOOM Lab`} description={`${album.title}, ${albumDate(album)}, ${album.year}. Moments from BOOM Lab.`}>
+  <header class="album-header">
+    <a class="back" href={`${base}/gallery#album-${album.slug}`}>← Gallery</a>
+    <p class="meta"><time datetime={album.date}>{albumDate(album)}, {album.year}</time><span>{album.category}</span></p>
+    <h1 lang="ko">{album.titleKo}</h1>
+    <p class="english-title">{album.title}</p>
+  </header>
+  <div class="album-sections">
+    {album.sections.map((section, sectionIndex) => (
+      <section class="event-section" aria-label={section.title}>
+        {album.sections.length > 1 && (
+          <header class="event-heading">
+            <p><time datetime={section.date}>{albumDate(section)}, {album.year}</time></p>
+            <h2 lang="ko">{section.titleKo}</h2>
+            <p class="english-title">{section.title}</p>
+          </header>
+        )}
+        <div class="album-photos">
+          {section.photos.map((photo, index) => (
+            <a class="photo" href={`${base}/images/gallery/${photo.file}`} aria-label={`Enlarge photo ${index + 1}: ${section.title}`}>
+              <img src={`${base}/images/gallery/${photo.file}`} alt={photo.alt} width={photo.width} height={photo.height} loading={index === 0 && sectionIndex === 0 ? "eager" : "lazy"} decoding="async" />
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+  <div class="album-footer"><a class="back" href={`${base}/gallery#album-${album.slug}`}>← Back to Gallery</a></div>
+  <dialog class="lightbox" aria-label="Gallery photo viewer">
+    <div class="viewer">
+      <button class="close" type="button" aria-label="Close photo viewer">Close ×</button>
+      <img class="large-photo" alt="" />
+      <div class="controls">
+        <button class="previous" type="button" aria-label="Previous photo">← Previous</button>
+        <span class="position" aria-live="polite"></span>
+        <button class="next" type="button" aria-label="Next photo">Next →</button>
+      </div>
+    </div>
+  </dialog>
+</Layout>
+
+<script>
+  const photos = [...document.querySelectorAll<HTMLAnchorElement>(".photo")];
+  const dialog = document.querySelector<HTMLDialogElement>(".lightbox")!;
+  const large = dialog.querySelector<HTMLImageElement>(".large-photo")!;
+  const position = dialog.querySelector<HTMLElement>(".position")!;
+  const previous = dialog.querySelector<HTMLButtonElement>(".previous")!;
+  const next = dialog.querySelector<HTMLButtonElement>(".next")!;
+  let current = 0;
+  let previousOverflow = "";
+  function show(index: number) {
+    current = (index + photos.length) % photos.length;
+    large.src = photos[current].href;
+    large.alt = photos[current].querySelector("img")!.alt;
+    position.textContent = `${current + 1} / ${photos.length}`;
+  }
+  previous.hidden = next.hidden = photos.length < 2;
+  photos.forEach((photo, index) => photo.addEventListener("click", (event) => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    show(index);
+    previousOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = "hidden";
+    dialog.showModal();
+  }));
+  dialog.querySelector(".close")!.addEventListener("click", () => dialog.close());
+  previous.addEventListener("click", () => show(current - 1));
+  next.addEventListener("click", () => show(current + 1));
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") { event.preventDefault(); show(current - 1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); show(current + 1); }
+  });
+  dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener("close", () => { document.documentElement.style.overflow = previousOverflow; });
+</script>
+
+<style>
+  .album-header, .album-sections, .album-footer { width: var(--content); margin-inline: auto; }
+  .album-header { padding: 44px 0 48px; }
+  .back { color: var(--cyan); font-size: .9rem; }
+  .back:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 36px 0 14px; color: var(--muted); font-size: .9rem; }
+  .meta span { color: var(--cyan); }
+  h1 { max-width: 1100px; margin: 0; font-size: clamp(2rem, 4.5vw, 4rem); line-height: 1.3; letter-spacing: -.035em; word-break: keep-all; }
+  .english-title { color: var(--muted); margin: 12px 0 0; font-size: 1.15rem; line-height: 1.5; }
+  .event-section + .event-section { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--line); }
+  .event-heading { margin-bottom: 28px; }
+  .event-heading > p:first-child { font-size: .85rem; color: var(--cyan); }
+  h2 { margin: 10px 0; font-size: clamp(1.4rem, 3vw, 2rem); word-break: keep-all; }
+  .event-heading .english-title { font-size: 1rem; }
+  .album-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 24px; }
+  .photo { display: grid; place-items: center; background: #061522; padding: 12px; cursor: zoom-in; }
+  .photo:first-child { grid-column: 1 / -1; }
+  .photo img { display: block; width: 100%; height: auto; max-height: 520px; object-fit: contain; }
+  .photo:first-child img { max-height: 680px; }
+  .album-footer { padding-block: 48px 80px; }
+  .lightbox { width: 100vw; max-width: none; height: 100dvh; max-height: none; padding: 24px; border: 0; margin: 0; background: #02080ff5; color: white; }
+  .lightbox::backdrop { background: #02080f; }
+  .viewer { height: 100%; max-width: 1500px; margin: auto; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 16px; }
+  .large-photo { width: 100%; height: 100%; object-fit: contain; }
+  .close { justify-self: end; }
+  button { font: inherit; color: inherit; border: 1px solid #52676b; border-radius: 3px; padding: 10px 16px; background: #102631; cursor: pointer; }
+  button:hover { background: #234554; }
+  .controls { display: flex; justify-content: center; align-items: center; gap: 24px; }
+  .position { min-width: 48px; text-align: center; font-size: .9rem; }
+  button[hidden] { display: none; }
+  @media (max-width: 600px) {
+    .album-header { padding-block: 28px 32px; }
+    .album-photos { grid-template-columns: 1fr; gap: 16px; }
+    .photo { padding: 0; }
+    .lightbox { padding: 16px 12px; }
+    .controls { gap: 14px; }
+    button { padding: 10px 12px; font-size: .85rem; }
+  }
+</style>
