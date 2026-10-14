@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageIntro from "./PageIntro.astro";
 
-const { title, description, sections } = Astro.props;
+const { title, description, sections, showSectionHeadings = true } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const pageUrl = (path = "") => `${base}/${path}`;
 ---
@@ -12,11 +12,11 @@ const pageUrl = (path = "") => `${base}/${path}`;
 
   <div class="directory-shell">
     {sections.map((section, sectionIndex) => (
-      <section class="member-section" aria-labelledby={`member-section-${sectionIndex}`}>
-        <header class="section-heading">
+      <section class="member-section" aria-labelledby={showSectionHeadings ? `member-section-${sectionIndex}` : undefined} aria-label={!showSectionHeadings ? section.title : undefined}>
+        {showSectionHeadings && <header class="section-heading">
           <h2 id={`member-section-${sectionIndex}`}>{section.title}</h2>
           <p>{section.members.length} {section.members.length === 1 ? "member" : "members"}</p>
-        </header>
+        </header>}
 
         <ul class="member-grid">
           {section.members.map((member) => (

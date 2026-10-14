@@ -5,17 +5,17 @@ export const researchAreas = [
     description: "We develop optical imaging technologies to explore living systems, understand disease, and bring new insights to medicine.",
     topics: [
       {
-        id: "endoscopic-imaging",
-        title: "Endoscopic & Catheter-based Imaging",
-        shortTitle: "Endoscopic Imaging",
-        lead: "Bringing light into places that are difficult to reach.",
+        id: "oct-catheter-imaging",
+        title: "OCT & Catheter-based Imaging",
+        shortTitle: "OCT & Catheter Imaging",
+        lead: "Developing optical systems to reveal tissue structure and biochemical information.",
         paragraphs: [
-          "Many structures inside the body are difficult to access with conventional imaging tools. We develop miniature optical probes and imaging catheters that reveal fine tissue structures from within narrow spaces.",
-          "Our work combines optical coherence tomography (OCT), fluorescence lifetime imaging (FLIm), optical design, and fiber-based scanning technology to collect clear, complementary information through compact instruments. These tools help extend optical imaging to internal organs and support the development of image-guided procedures.",
+          "We develop optical coherence tomography (OCT) systems and catheter-based imaging technologies to reveal tissue structure and complementary biochemical information. Our work spans benchtop instruments and miniature probes, combining optical design, scanning, and multimodal detection.",
+          "We design illumination, signal collection, and fiber-based interfaces to improve image quality and adapt imaging systems to different measurement settings. Integrating OCT with fluorescence lifetime imaging (OCT-FLIm) brings structural and biochemical information together, providing a platform for biomedical research and clinical imaging.",
         ],
         images: [
           { file: "catheter-system.webp", caption: "OCT-FLIm brings tissue structure and biochemical information together.", alt: "Combined OCT and fluorescence lifetime imaging catheter system" },
-          { file: "catheter-volume.webp", caption: "Endoscopic OCT reveals tissue structures beneath the surface.", alt: "Three-dimensional and cross-sectional optical tissue images beside a histology image" },
+          { file: "benchtop-oct.webp", caption: "Benchtop OCT reveals tissue structure in 3D.", alt: "Benchtop OCT volume, en face view, and cross-section of tissue alongside a histology image" },
         ],
       },
       {
