@@ -1,6 +1,32 @@
 {
   "students": [
     {
+      "title": "Postdocs",
+      "members": [
+        {
+          "id": "jeongmoo-han",
+          "englishName": "Jeongmoo Han, Ph.D.",
+          "image": "images/people/jeongmoo-han.webp",
+          "history": [
+            {
+              "period": "2024–Present",
+              "description": "Post-doctoral Researcher, Mechanical Engineering, KAIST"
+            },
+            {
+              "period": "2020–2024",
+              "description": "Ph.D, Mechanical Engineering, KAIST"
+            },
+            {
+              "period": "2018–2020",
+              "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
+            }
+          ],
+          "currentPosition": "Post-doctoral Researcher, Mechanical Engineering, KAIST",
+          "degree": "Ph.D. 2024 · KAIST"
+        }
+      ]
+    },
+    {
       "title": "Ph.D. Candidates",
       "members": [
         {
@@ -164,31 +190,6 @@
       "degree": "Ph.D. 2019 · Hanyang University"
     },
     {
-      "id": "jeongmoo-han",
-      "englishName": "Jeongmoo Han, Ph.D.",
-      "image": "images/people/jeongmoo-han.webp",
-      "history": [
-        {
-          "period": "2026–Present",
-          "description": "Post-doctoral Researcher, Mechanican Engineering, MIT"
-        },
-        {
-          "period": "2024–2026",
-          "description": "Post-doctoral Researcher, Mechanical Engineering, KAIST"
-        },
-        {
-          "period": "2020–2024",
-          "description": "Ph.D, Mechanical Engineering, KAIST"
-        },
-        {
-          "period": "2018–2020",
-          "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
-        }
-      ],
-      "currentPosition": "Post-doctoral Researcher, Mechanican Engineering, MIT",
-      "degree": "Ph.D. 2024 · KAIST"
-    },
-    {
       "id": "jeonggeun-song",
       "englishName": "Jeonggeun Song, Ph.D.",
       "image": "images/people/jeonggeun-song.webp",
@@ -219,6 +220,10 @@
       "image": "images/people/ungyo-kang.webp",
       "history": [
         {
+          "period": "2026–Present",
+          "description": "Post-doctoral Researcher, Sejong University"
+        },
+        {
           "period": "2019–2026",
           "description": "Ph.D, Mechanical Engineering, KAIST"
         },
@@ -227,7 +232,8 @@
           "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
         }
       ],
-      "degree": "Ph.D. 2026 · KAIST"
+      "degree": "Ph.D. 2026 · KAIST",
+      "currentPosition": "Post-doctoral Researcher, Sejong University"
     },
     {
       "id": "woojin-lee",
@@ -494,11 +500,16 @@
       "image": "images/people/woo-seop-kim.webp",
       "history": [
         {
+          "period": "Present",
+          "description": "Researcher, Envision"
+        },
+        {
           "period": "2017–2019",
           "description": "M.S, Dept. Biomedical Engineering, Hanyang University"
         }
       ],
-      "degree": "M.S. 2019 · Hanyang University"
+      "degree": "M.S. 2019 · Hanyang University",
+      "currentPosition": "Researcher, Envision"
     },
     {
       "id": "yun-jeong-jeong",
@@ -506,10 +517,15 @@
       "image": "images/people/yun-jeong-jeong.webp",
       "history": [
         {
+          "period": "Present",
+          "description": "Researcher, Sejong University"
+        },
+        {
           "period": "2014–2019",
           "description": "Researcher, Dept. Biomedical Engineering, Hanyang University"
         }
-      ]
+      ],
+      "currentPosition": "Researcher, Sejong University"
     },
     {
       "id": "zeyuan-li",

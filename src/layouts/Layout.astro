@@ -62,12 +62,12 @@ const navItems = [
         {
           navItems.map((item) => item.children ? (
             <div class="nav-group">
-              <a href={pageUrl(item.children[0].href)} class:list={{ "nav-label": true, active: item.active }} aria-expanded="false" aria-controls={`nav-${item.label.toLowerCase()}`}>
+              <button type="button" class:list={{ "nav-label": true, active: item.active }} aria-expanded="false" aria-controls={`nav-${item.label.toLowerCase()}`}>
                 {item.label}
-              </a>
+              </button>
               <div class="dropdown" id={`nav-${item.label.toLowerCase()}`}>
                 {item.children.map((child) => (
-                  <a href={pageUrl(child.href)}>{child.label}</a>
+                  <a href={pageUrl(child.href)} aria-current={currentPath === `/${child.href}` ? "page" : undefined}>{child.label}</a>
                 ))}
               </div>
             </div>
@@ -100,8 +100,9 @@ const navItems = [
 <script>
   const groups = document.querySelectorAll<HTMLElement>(".nav-group");
   const closeMenus = new Map<HTMLElement, () => void>();
+  const compactNavigation = window.matchMedia("(max-width: 1200px)");
   groups.forEach((group) => {
-    const toggle = group.querySelector<HTMLAnchorElement>(".nav-label")!;
+    const toggle = group.querySelector<HTMLButtonElement>(".nav-label")!;
     let closeTimer: ReturnType<typeof setTimeout> | undefined;
     const setOpen = (open: boolean) => {
       clearTimeout(closeTimer);
@@ -109,17 +110,15 @@ const navItems = [
       toggle.setAttribute("aria-expanded", String(open));
     };
     closeMenus.set(group, () => setOpen(false));
+    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
     group.addEventListener("pointerenter", (event) => {
-      if (event.pointerType === "mouse") setOpen(true);
+      if (event.pointerType === "mouse" && !compactNavigation.matches) setOpen(true);
     });
     group.addEventListener("pointerleave", (event) => {
-      if (event.pointerType === "mouse") closeTimer = setTimeout(() => setOpen(false), 220);
+      if (event.pointerType === "mouse" && !compactNavigation.matches) closeTimer = setTimeout(() => setOpen(false), 220);
     });
     group.addEventListener("focusout", (event) => {
       if (!group.contains(event.relatedTarget as Node)) setOpen(false);
-    });
-    group.querySelector(".nav-label")?.addEventListener("focus", (event) => {
-      if ((event.target as HTMLElement).matches(":focus-visible")) setOpen(true);
     });
     group.addEventListener("keydown", (event) => {
       if (event.key === "ArrowDown" && event.target === toggle) {
@@ -136,6 +135,11 @@ const navItems = [
       if (!group.contains(event.target as Node)) setOpen(false);
     });
   });
+  document.querySelectorAll<HTMLAnchorElement>(".site-header a").forEach((link) => {
+    link.addEventListener("click", () => closeMenus.forEach((close) => close()));
+  });
+  compactNavigation.addEventListener("change", () => closeMenus.forEach((close) => close()));
+  window.addEventListener("pageshow", () => closeMenus.forEach((close) => close()));
 </script>
 
 <style is:global>
@@ -176,7 +180,8 @@ const navItems = [
     border-bottom: 1px solid var(--line);
   }
   .brand { display: block; width: max-content; }
-  .brand-logo { width: 238px; height: auto; filter: invert(1) hue-rotate(180deg); }
+  .brand-logo { width: 260px; height: auto; filter: invert(1) hue-rotate(180deg); }
+  button.nav-label { border: 0; background: none; cursor: pointer; text-align: left; }
   nav { display: flex; justify-content: center; align-items: center; gap: 36px; }
   nav > a, .nav-label { position: relative; color: #d9e1e6; font: inherit; font-size: 1rem; letter-spacing: 0.02em; white-space: nowrap; }
   nav > a, .nav-label { display: block; padding: 8px 0; }
@@ -188,7 +193,7 @@ const navItems = [
   .dropdown::before { content: ""; position: absolute; left: -1px; right: -1px; top: -12px; height: 12px; }
   .nav-group:has(.nav-label[aria-expanded="true"]) .dropdown { opacity: 1; visibility: visible; pointer-events: auto; }
   .dropdown a { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 11px 12px; color: #d9e1e6; font-size: .94rem; }
-  .dropdown a:hover { background: rgba(255,255,255,.06); color: var(--acid); }
+  .dropdown a:hover, .dropdown a[aria-current="page"] { background: rgba(255,255,255,.06); color: var(--acid); }
   .site-footer { width: var(--content); margin: 0 auto; padding: 68px 0 44px; display: flex; justify-content: space-between; gap: 32px; border-top: 1px solid var(--line); }
   .footer-brand { display: block; width: max-content; }
   .footer-brand img { width: 250px; height: auto; filter: invert(1) hue-rotate(180deg); }
@@ -198,18 +203,22 @@ const navItems = [
   :focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; }
   @media (max-width: 1200px) {
     :root { --content: min(100% - 40px, 1280px); }
-    .site-header { height: auto; min-height: 92px; grid-template-columns: 1fr auto; }
+    .site-header { height: auto; min-height: 92px; grid-template-columns: 1fr; gap: 12px; padding-top: 18px; }
     .site-header nav { grid-column: 1 / -1; order: 3; justify-content: flex-start; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--line); }
   }
   @media (max-width: 640px) {
     :root { --content: min(100% - 28px, 1280px); }
-    .site-header { min-height: 82px; gap: 14px; }
-    .brand-logo { width: 170px; }
+    .site-header { gap: 16px; padding-top: 20px; }
+    .site-header .brand { justify-self: center; }
+    .brand-logo { width: min(250px, 72vw); }
     .footer-brand img { width: 210px; }
-    #nav-research { left: 0; right: auto; }
-    #nav-publication { left: auto; right: 0; }
-    .dropdown { min-width: 210px; }
-    .site-header nav { gap: 12px 28px; }
+    .site-header nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 12px; padding: 4px 0 8px; }
+    .site-header nav > a, .site-header .nav-label { width: 100%; text-align: center; padding: 12px 0; min-height: 44px; font-size: .9rem; }
+    .site-header nav > a::after, .site-header .nav-label::after { bottom: 3px; }
+    .site-header .nav-group { position: static; }
+    .site-header .dropdown { left: 0; right: 0; top: 100%; min-width: 0; max-height: 60svh; overflow-y: auto; }
+    .site-header .dropdown::before { display: none; }
+    .site-header .dropdown a { min-height: 48px; }
     .site-footer { flex-direction: column; padding-top: 48px; }
     .footer-meta { text-align: left; }
   }
